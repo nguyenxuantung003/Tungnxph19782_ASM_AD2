@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "651180275128",
+    "firebase_url": "https://nguyenxuantung-ph19782-default-rtdb.firebaseio.com",
+    "project_id": "nguyenxuantung-ph19782",
+    "storage_bucket": "nguyenxuantung-ph19782.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:651180275128:android:327df30356b3e64184cb4d",
+        "android_client_info": {
+          "package_name": "com.example.nguyenxuantung_ph19782"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "651180275128-icirr6560ccggnns0arkshhnjf6mbbtn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.nguyenxuantung_ph19782",
+            "certificate_hash": "ff9f41c1904c1b5d9085c2410945f0c5bebd38c9"
+          }
+        },
+        {
+          "client_id": "651180275128-qfl6ljok03ehsudvmj4jqglcthq75lhs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5-N1ESyM0zzq8Dx8oNHZOY_nfPVeHyh0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "651180275128-qfl6ljok03ehsudvmj4jqglcthq75lhs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
