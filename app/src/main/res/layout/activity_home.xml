@@ -69,13 +69,14 @@
                 <ImageView
                     android:layout_width="48dp"
                     android:layout_height="48dp"
-                    android:src="@drawable/step" />
+                    android:src="@drawable/icon_viet" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Steps"
+                    android:text="Lời Biết Ơn"
+                    android:textColor="@color/black"
                     android:textSize="16sp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>

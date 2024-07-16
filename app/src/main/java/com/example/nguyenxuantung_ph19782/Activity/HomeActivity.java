@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -41,6 +42,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if (item.getItemId() == R.id.menu_home_btn1) {
+                    startActivity(new Intent(HomeActivity.this,LoiBietOnActivity.class));
                     // Handle home click
                     Toast.makeText(HomeActivity.this, "Home", Toast.LENGTH_SHORT).show();
                     return true;
