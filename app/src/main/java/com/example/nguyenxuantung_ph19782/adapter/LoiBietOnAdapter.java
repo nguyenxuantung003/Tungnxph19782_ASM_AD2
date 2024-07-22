@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,11 +22,14 @@ import java.util.Locale;
 public class LoiBietOnAdapter extends ArrayAdapter<Loibieton> {
     private Context context;
     private ArrayList<Loibieton> loibietons;
+    private OnItemActionListener listener;
 
-    public LoiBietOnAdapter(@NonNull Context context, ArrayList<Loibieton> loibietons) {
+
+    public LoiBietOnAdapter(@NonNull Context context, ArrayList<Loibieton> loibietons,OnItemActionListener onItemActionListener) {
         super(context,0,loibietons);
         this.context = context;
         this.loibietons = loibietons;
+        this.listener = onItemActionListener;
     }
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -36,6 +40,8 @@ public class LoiBietOnAdapter extends ArrayAdapter<Loibieton> {
             viewHolder = new ViewHolder();
             viewHolder.tvGratitudeNote = convertView.findViewById(R.id.tvGratitudeNote);
             viewHolder.tvDate = convertView.findViewById(R.id.tvDate);
+            viewHolder.btnUpdate = convertView.findViewById(R.id.btnUpdate);
+            viewHolder.btnDelete = convertView.findViewById(R.id.btnDelete);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -54,12 +60,37 @@ public class LoiBietOnAdapter extends ArrayAdapter<Loibieton> {
             e.printStackTrace();
             viewHolder.tvDate.setText(dateString);
         }
+        viewHolder.btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener != null) {
+                    listener.onUpdateClicked(mentalActivity);
+                }
+            }
+        });
+
+        // Set click listener for delete button
+        viewHolder.btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener != null) {
+                    listener.onDeleteClicked(mentalActivity);
+                }
+            }
+        });
 
         return convertView;
     }
     private static class ViewHolder {
         TextView tvGratitudeNote;
         TextView tvDate;
+        Button btnDelete;
+        Button btnUpdate;
+    }
+    public interface OnItemActionListener {
+        void onUpdateClicked(Loibieton item);
+
+        void onDeleteClicked(Loibieton item);
     }
 
 

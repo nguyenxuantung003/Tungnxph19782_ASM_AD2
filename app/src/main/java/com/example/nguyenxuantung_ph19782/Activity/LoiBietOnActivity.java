@@ -15,6 +15,8 @@ import android.widget.Toast;
 import com.example.nguyenxuantung_ph19782.R;
 import com.example.nguyenxuantung_ph19782.adapter.LoiBietOnAdapter;
 import com.example.nguyenxuantung_ph19782.model.Loibieton;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -30,7 +32,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
-public class LoiBietOnActivity extends AppCompatActivity {
+public class LoiBietOnActivity extends AppCompatActivity implements LoiBietOnAdapter.OnItemActionListener {
     private EditText etGratitudeNotes;
     private FloatingActionButton fab;
     private ListView lvGratitudeNotes;
@@ -54,7 +56,7 @@ public class LoiBietOnActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         currentUser = firebaseAuth.getCurrentUser();
         gratitudeNotesList = new ArrayList<>();
-        adapter = new LoiBietOnAdapter(this, gratitudeNotesList);
+        adapter = new LoiBietOnAdapter(this, gratitudeNotesList,this);
         lvGratitudeNotes.setAdapter(adapter);
         fab.setOnClickListener(v -> {
             Intent intent = new Intent(LoiBietOnActivity.this, ThemLoiBietOnActivity.class);
@@ -87,4 +89,27 @@ public class LoiBietOnActivity extends AppCompatActivity {
             });
         }
     }
+
+    @Override
+    public void onUpdateClicked(Loibieton item) {
+
+    }
+    public void onDeleteClicked(Loibieton item) {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("MentalActivities").child(item.getActivityId());
+        ref.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    Toast.makeText(LoiBietOnActivity.this, "Đã xóa mục thành công!", Toast.LENGTH_SHORT).show();
+                    // Cập nhật lại danh sách và giao diện sau khi xóa
+                    gratitudeNotesList.remove(item);
+                    adapter.notifyDataSetChanged();
+                } else {
+                    Toast.makeText(LoiBietOnActivity.this, "Xảy ra lỗi khi xóa mục!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
 }
+
