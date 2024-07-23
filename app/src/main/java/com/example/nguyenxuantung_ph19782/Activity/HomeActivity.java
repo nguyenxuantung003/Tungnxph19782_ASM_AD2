@@ -55,6 +55,7 @@ public class HomeActivity extends AppCompatActivity {
                     Toast.makeText(HomeActivity.this, "Health", Toast.LENGTH_SHORT).show();
                     return true;
                 } else if (item.getItemId() == R.id.menu_home_btn4) {
+                    startActivity(new Intent(HomeActivity.this,ProfileActivity.class));
                     // Handle profile click
                     Toast.makeText(HomeActivity.this, "Profile", Toast.LENGTH_SHORT).show();
                     return true;
