@@ -3,6 +3,8 @@ package com.example.nguyenxuantung_ph19782.Activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -27,10 +29,11 @@ import java.util.Map;
 public class ProfileActivity extends AppCompatActivity {
 
     private EditText usernameEditText, emailEditText, ageEditText, genderEditText, heightEditText, weightEditText;
-    private Button updateButton;
+    private Button updateButton,goiythucdonButton;
     private DatabaseReference databaseReference;
     private FirebaseUser currentUser;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +46,7 @@ public class ProfileActivity extends AppCompatActivity {
         heightEditText = findViewById(R.id.height);
         weightEditText = findViewById(R.id.weight);
         updateButton = findViewById(R.id.update_button);
+        goiythucdonButton = findViewById(R.id.goi_y_thuc_don_btn);
 
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(currentUser.getUid());
@@ -50,6 +54,7 @@ public class ProfileActivity extends AppCompatActivity {
         loadUserInfo();
 
         updateButton.setOnClickListener(v -> updateUserInfo());
+        goiythucdonButton.setOnClickListener(v -> openDietSuggestionActivity());
 
         heightEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -155,7 +160,10 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
 
-
-
+    private void openDietSuggestionActivity() {
+        Intent intent = new Intent(ProfileActivity.this, GoiythucdonActivity.class);
+        intent.putExtra("userId", currentUser.getUid());
+        startActivity(intent);
+    }
 
 }

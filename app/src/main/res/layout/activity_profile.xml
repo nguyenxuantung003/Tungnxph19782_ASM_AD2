@@ -58,4 +58,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Update" />
+    <Button
+        android:id="@+id/goi_y_thuc_don_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gợi ý thực đơn"
+        android:layout_marginTop="16dp"/>
 </LinearLayout>
