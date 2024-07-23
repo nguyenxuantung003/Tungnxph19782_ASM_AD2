@@ -47,6 +47,8 @@ public class HomeActivity extends AppCompatActivity {
                     Toast.makeText(HomeActivity.this, "Home", Toast.LENGTH_SHORT).show();
                     return true;
                 } else if (item.getItemId() == R.id.menu_home_btn2) {
+                    Intent intent = new Intent(HomeActivity.this, QuanlyvandongActivity.class);
+                    startActivity(intent);
                     // Handle search click
                     Toast.makeText(HomeActivity.this, "Search", Toast.LENGTH_SHORT).show();
                     return true;
