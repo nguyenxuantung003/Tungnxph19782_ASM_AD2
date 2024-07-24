@@ -3,7 +3,7 @@ package com.example.nguyenxuantung_ph19782.model;
 public class Buocchan {
     private String userId;
     private String activityId;
-    private long date;
+    private String date;
     private int stepsCount;
     private int goal;
     private boolean goalAchieved;
@@ -13,7 +13,7 @@ public class Buocchan {
     public Buocchan() {
     }
 
-    public Buocchan(String userId, String activityId, long date, int stepsCount, int goal, boolean goalAchieved, long createdAt, long updatedAt) {
+    public Buocchan(String userId, String activityId, String date, int stepsCount, int goal, boolean goalAchieved, long createdAt, long updatedAt) {
         this.userId = userId;
         this.activityId = activityId;
         this.date = date;
@@ -40,11 +40,11 @@ public class Buocchan {
         this.activityId = activityId;
     }
 
-    public long getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(long date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -87,5 +87,4 @@ public class Buocchan {
     public void setUpdatedAt(long updatedAt) {
         this.updatedAt = updatedAt;
     }
-
 }
