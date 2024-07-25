@@ -6,7 +6,7 @@ public class Message {
     private String message;
     private String timestamp;
 
-    public Message() {
+    public Message(String uid, String messageText) {
     }
 
     public Message(String senderId, String receiverId, String message, String timestamp) {

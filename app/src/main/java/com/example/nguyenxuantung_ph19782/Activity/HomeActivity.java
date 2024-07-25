@@ -48,6 +48,7 @@ public class HomeActivity extends AppCompatActivity {
         cardView3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this, GroupListActivity.class));
                 Toast.makeText(HomeActivity.this,"Chon",Toast.LENGTH_SHORT).show();
             }
         });
