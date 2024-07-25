@@ -1,35 +1,35 @@
 package com.example.nguyenxuantung_ph19782.model;
 
 public class Message {
-    private String sender;
-    private String receiver;
+    private String senderId;
+    private String receiverId;
     private String message;
-    private long timestamp;
+    private String timestamp;
 
     public Message() {
     }
 
-    public Message(String sender, String receiver, String message, long timestamp) {
-        this.sender = sender;
-        this.receiver = receiver;
+    public Message(String senderId, String receiverId, String message, String timestamp) {
+        this.senderId = senderId;
+        this.receiverId = receiverId;
         this.message = message;
         this.timestamp = timestamp;
     }
 
-    public String getSender() {
-        return sender;
+    public String getSenderId() {
+        return senderId;
     }
 
-    public void setSender(String sender) {
-        this.sender = sender;
+    public void setSenderId(String senderId) {
+        this.senderId = senderId;
     }
 
-    public String getReceiver() {
-        return receiver;
+    public String getReceiverId() {
+        return receiverId;
     }
 
-    public void setReceiver(String receiver) {
-        this.receiver = receiver;
+    public void setReceiverId(String receiverId) {
+        this.receiverId = receiverId;
     }
 
     public String getMessage() {
@@ -40,11 +40,11 @@ public class Message {
         this.message = message;
     }
 
-    public long getTimestamp() {
+    public String getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(long timestamp) {
+    public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
     }
 }
