@@ -16,7 +16,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomnavigation.LabelVisibilityMode;
 
 public class HomeActivity extends AppCompatActivity {
-    private CardView cardView;
+    private CardView cardView1,cardView2,cardView3,cardView4,cardView5,cardView6;
     private BottomNavigationView menuHome;
     @SuppressLint({"MissingInflatedId", "WrongConstant"})
     @Override
@@ -24,13 +24,56 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         menuHome = findViewById(R.id.bottom_navigation_home);
-        cardView = findViewById(R.id.carview1);
-        cardView.setOnClickListener(new View.OnClickListener() {
+        cardView1 = findViewById(R.id.carview1);
+        cardView2 = findViewById(R.id.carview2);
+        cardView3 = findViewById(R.id.carview3);
+        cardView4 = findViewById(R.id.carview4);
+        cardView5 = findViewById(R.id.carview5);
+        cardView6 = findViewById(R.id.carview6);
+        cardView1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this, FriendRequestActivity.class));
+                Toast.makeText(HomeActivity.this,"Chon",Toast.LENGTH_SHORT).show();
+            }
+        });
+        cardView2.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this, FriendsListActivity.class));
+                Toast.makeText(HomeActivity.this,"Chon",Toast.LENGTH_SHORT).show();
+            }
+        });
+        cardView3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(HomeActivity.this,"Chon",Toast.LENGTH_SHORT).show();
             }
         });
+        cardView4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(HomeActivity.this,"Chon",Toast.LENGTH_SHORT).show();
+            }
+        });
+        cardView5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(HomeActivity.this,"Chon",Toast.LENGTH_SHORT).show();
+            }
+        });
+        cardView6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(HomeActivity.this,"Chon",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+
+
 
 
 
@@ -53,6 +96,8 @@ public class HomeActivity extends AppCompatActivity {
                     Toast.makeText(HomeActivity.this, "Search", Toast.LENGTH_SHORT).show();
                     return true;
                 } else if (item.getItemId() == R.id.menu_home_btn3) {
+                    Intent intent = new Intent(HomeActivity.this, AddFriendActivity.class);
+                    startActivity(intent);
                     // Handle health click
                     Toast.makeText(HomeActivity.this, "Health", Toast.LENGTH_SHORT).show();
                     return true;

@@ -82,6 +82,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/carview2"
             android:clickable="true"
             android:focusable="true"
             android:layout_width="180dp"
@@ -113,6 +114,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/carview3"
             android:clickable="true"
             android:focusable="true"
             android:layout_width="180dp"
@@ -144,6 +146,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/carview4"
             android:clickable="true"
             android:focusable="true"
             android:layout_width="180dp"
@@ -177,6 +180,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/carview5"
             android:clickable="true"
             android:focusable="true"
             android:layout_width="180dp"
@@ -209,6 +213,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/carview6"
             android:clickable="true"
             android:focusable="true"
             android:layout_width="180dp"
