@@ -240,7 +240,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Sleep"
+                    android:text="BMI"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
                     android:textSize="16sp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>

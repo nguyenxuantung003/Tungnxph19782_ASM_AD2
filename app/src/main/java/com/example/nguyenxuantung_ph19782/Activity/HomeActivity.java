@@ -67,6 +67,7 @@ public class HomeActivity extends AppCompatActivity {
         cardView6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this, BMIActivity.class));
                 Toast.makeText(HomeActivity.this,"Chon",Toast.LENGTH_SHORT).show();
             }
         });
