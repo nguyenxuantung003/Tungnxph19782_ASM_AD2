@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <!-- Dropdown để chọn khoảng thời gian (tuần, tháng, từ trước đến nay) -->
+    <Spinner
+        android:id="@+id/spinnerTimeRange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:entries="@array/time_ranges"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Số lượng bạn bè đã kết bạn -->
+    <TextView
+        android:id="@+id/tvFriendsCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Người đã kết bạn: 0"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:layout_below="@id/spinnerTimeRange"
+        android:layout_marginTop="16dp"/>
+
+    <!-- Số bước chân đã đi được -->
+    <TextView
+        android:id="@+id/tvStepsCount"
+        android:layout_width="wrap_content"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_height="wrap_content"
+        android:text="Số bước đã đi: 0"
+        android:textSize="18sp"
+        android:layout_below="@id/tvFriendsCount"
+        android:layout_marginTop="16dp"/>
+
+    <!-- Số ngày hoàn thành mục tiêu -->
+    <TextView
+        android:id="@+id/tvGoalsCompleted"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="số ngày hoàn thành mục tiêu: 0"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:layout_below="@id/tvStepsCount"
+        android:layout_marginTop="16dp"/>
+
+    <!-- Số hoạt động tinh thần -->
+    <TextView
+        android:id="@+id/tvMentalActivitiesCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:text="Lời biết ơn đã viết: 0"
+        android:textSize="18sp"
+        android:layout_below="@id/tvGoalsCompleted"
+        android:layout_marginTop="16dp"/>
+
+    <!-- Số hoạt động thể chất -->
+    <TextView
+        android:id="@+id/tvPhysicalActivitiesCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hoạt động thể chất: 0"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:layout_below="@id/tvMentalActivitiesCount"
+        android:layout_marginTop="16dp"/>
+</RelativeLayout>

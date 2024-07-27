@@ -100,6 +100,8 @@ public class HomeActivity extends AppCompatActivity {
                     startActivity(new Intent(HomeActivity.this,ProfileActivity.class));
                     // Handle profile click
                     return true;
+                } else if(item.getItemId() == R.id.menu_home_btn5){
+                    startActivity(new Intent(HomeActivity.this,StatisticsActivity.class));
                 }
                 return false;
             }

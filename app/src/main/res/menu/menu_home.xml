@@ -16,4 +16,8 @@
         android:id="@+id/menu_home_btn4"
         android:icon="@drawable/icon_profile"
         android:title="Thông tin" />
+    <item
+        android:id="@+id/menu_home_btn5"
+        android:icon="@drawable/ic_launcher_background"
+        android:title="Thống kê" />
 </menu>

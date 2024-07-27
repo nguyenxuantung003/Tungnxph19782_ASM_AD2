@@ -38,16 +38,25 @@ public class BMIActivity extends AppCompatActivity {
             Intent intent = new Intent(BMIActivity.this, MenuSuggestionActivity.class);
             // Pass BMI result to the new activity
             String bmiString = tvResult.getText().toString();
+            // Ensure there is a valid BMI result
+            if (!bmiString.startsWith("BMI: ")) {
+                Toast.makeText(BMIActivity.this, "BMI result is not valid", Toast.LENGTH_SHORT).show();
+                return;
+            }
             // Extract the BMI value from the string
-            double bmi = Double.parseDouble(bmiString.replace("BMI: ", "").trim());
-            intent.putExtra("BMI", bmi);
-            startActivity(intent);
+            try {
+                double bmi = Double.parseDouble(bmiString.replace("BMI: ", "").trim());
+                intent.putExtra("BMI", bmi);
+                startActivity(intent);
+            } catch (NumberFormatException e) {
+                Toast.makeText(BMIActivity.this, "Invalid BMI result", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 
     private void calculateBMI() {
-        String weightStr = etWeight.getText().toString().trim();
-        String heightStr = etHeight.getText().toString().trim();
+        String weightStr = etWeight.getText().toString().trim().replace(",", ".");
+        String heightStr = etHeight.getText().toString().trim().replace(",", ".");
 
         if (TextUtils.isEmpty(weightStr) || TextUtils.isEmpty(heightStr)) {
             Toast.makeText(this, "Please enter weight and height", Toast.LENGTH_SHORT).show();
@@ -61,7 +70,7 @@ public class BMIActivity extends AppCompatActivity {
                 Toast.makeText(this, "Height cannot be zero", Toast.LENGTH_SHORT).show();
                 return;
             }
-            float bmi = weight / (height * height);
+            double bmi = weight / (height * height);
             String bmiResult = String.format("BMI: %.2f", bmi);
             tvResult.setText(bmiResult);
 
