@@ -5,63 +5,118 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Thông tin"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textAlignment="center"
+        android:textSize="30dp"
+        android:layout_marginTop="20dp"/>
 
     <EditText
         android:id="@+id/username"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Username" />
+        android:layout_height="50dp"
+        android:hint="Username"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/custom_edittext_background"/>
 
     <EditText
         android:id="@+id/email"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:hint="Email"
-        android:inputType="textEmailAddress" />
+        android:layout_marginTop="10dp"
+        android:inputType="textEmailAddress"
+        android:background="@drawable/custom_edittext_background"/>
 
     <EditText
+        android:layout_marginTop="10dp"
         android:id="@+id/age"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:hint="Age"
-        android:inputType="number" />
+        android:inputType="number"
+        android:background="@drawable/custom_edittext_background"/>
 
     <EditText
+        android:layout_marginTop="10dp"
         android:id="@+id/gender"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Gender" />
+        android:layout_height="50dp"
+        android:hint="Gender"
+        android:background="@drawable/custom_edittext_background"/>
 
     <EditText
+        android:layout_marginTop="10dp"
         android:id="@+id/height"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:hint="Height (cm)"
-        android:inputType="numberDecimal" />
+        android:inputType="numberDecimal"
+        android:background="@drawable/custom_edittext_background"/>
 
     <EditText
+        android:layout_marginTop="10dp"
         android:id="@+id/weight"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:hint="Weight (kg)"
-        android:inputType="numberDecimal" />
+        android:inputType="numberDecimal"
+        android:background="@drawable/custom_edittext_background"/>
     <TextView
+        android:layout_marginTop="10dp"
         android:id="@+id/bmi_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="BMI: "
-        android:textSize="16sp"
+        android:textSize="25sp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
         android:paddingTop="16dp" />
 
-    <Button
-        android:id="@+id/update_button"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp">
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_marginTop="10dp"
+            android:id="@+id/update_button"
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_gravity="start"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_login_loginactivity"
+            android:textColor="@color/white"
+            android:text="Update" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:background="@drawable/btn_login_loginactivity"
+            android:textColor="@color/white"
+            android:id="@+id/goi_y_thuc_don_btn"
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:layout_gravity="end"
+            android:layout_height="wrap_content"
+            android:text="Gợi ý thực đơn"
+            android:layout_marginTop="10dp"/>
+    </LinearLayout>
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:background="@drawable/btn_login_loginactivity"
+        android:textColor="@color/white"
+        android:id="@+id/logout_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Update" />
-    <Button
-        android:id="@+id/goi_y_thuc_don_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Gợi ý thực đơn"
-        android:layout_marginTop="16dp"/>
+        android:text="Đăng xuất"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center_horizontal"/>
 </LinearLayout>

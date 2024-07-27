@@ -8,11 +8,14 @@
         android:id="@+id/groupNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
+        android:textSize="20sp"
+        android:textColor="@color/black"
         android:textStyle="bold"/>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/actionButton"
+        android:background="@drawable/btn_login_loginactivity"
+        android:textColor="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"

@@ -16,9 +16,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.nguyenxuantung_ph19782.R;
-import com.example.nguyenxuantung_ph19782.adapter.MessageAdapter;
 import com.example.nguyenxuantung_ph19782.adapter.MessageGroupAdapter;
-import com.example.nguyenxuantung_ph19782.model.Message;
 import com.example.nguyenxuantung_ph19782.model.MessageGroup;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;

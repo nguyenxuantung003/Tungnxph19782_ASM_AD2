@@ -3,17 +3,17 @@
     <item
         android:id="@+id/menu_home_btn1"
         android:icon="@drawable/icon_home"
-        android:title="Home" />
+        android:title="Trang chủ" />
     <item
         android:id="@+id/menu_home_btn2"
         android:icon="@drawable/icon_searh"
-        android:title="Search" />
+        android:title="Tìm kiếm" />
     <item
         android:id="@+id/menu_home_btn3"
         android:icon="@drawable/icon_health"
-        android:title="Health" />
+        android:title="kết bạn" />
     <item
         android:id="@+id/menu_home_btn4"
         android:icon="@drawable/icon_profile"
-        android:title="Profile" />
+        android:title="Thông tin" />
 </menu>

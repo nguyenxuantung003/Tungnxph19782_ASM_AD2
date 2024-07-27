@@ -31,14 +31,18 @@
         android:background="@drawable/edit_text_loginactivity"
         android:hint="Pass"
         android:id="@+id/login_pass"/>
+
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnlogin"
         android:layout_width="200dp"
-        android:layout_gravity="center"
         android:layout_height="wrap_content"
-        android:text="login"
+        android:layout_gravity="center"
         android:layout_marginTop="10dp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
         android:background="@drawable/btn_login_loginactivity"
-        android:id="@+id/btnlogin"/>
+        android:text="login" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

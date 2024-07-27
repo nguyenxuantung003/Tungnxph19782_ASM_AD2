@@ -33,8 +33,7 @@ public class HomeActivity extends AppCompatActivity {
         cardView1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(HomeActivity.this, FriendRequestActivity.class));
-                Toast.makeText(HomeActivity.this,"Chon",Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(HomeActivity.this, LoiBietOnActivity.class));
             }
         });
         cardView2.setOnClickListener(new View.OnClickListener() {
@@ -42,33 +41,30 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(HomeActivity.this, FriendsListActivity.class));
-                Toast.makeText(HomeActivity.this,"Chon",Toast.LENGTH_SHORT).show();
             }
         });
         cardView3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(HomeActivity.this, GroupListActivity.class));
-                Toast.makeText(HomeActivity.this,"Chon",Toast.LENGTH_SHORT).show();
             }
         });
         cardView4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(HomeActivity.this,"Chon",Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(HomeActivity.this,QuanlyvandongActivity.class));
             }
         });
         cardView5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(HomeActivity.this,"Chon",Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(HomeActivity.this, ExerciseListActivity.class));
             }
         });
         cardView6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(HomeActivity.this, BMIActivity.class));
-                Toast.makeText(HomeActivity.this,"Chon",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -87,26 +83,22 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if (item.getItemId() == R.id.menu_home_btn1) {
-                    startActivity(new Intent(HomeActivity.this,LoiBietOnActivity.class));
+                    startActivity(new Intent(HomeActivity.this,HomeActivity.class));
                     // Handle home click
-                    Toast.makeText(HomeActivity.this, "Home", Toast.LENGTH_SHORT).show();
                     return true;
                 } else if (item.getItemId() == R.id.menu_home_btn2) {
-                    Intent intent = new Intent(HomeActivity.this, QuanlyvandongActivity.class);
-                    startActivity(intent);
-                    // Handle search click
-                    Toast.makeText(HomeActivity.this, "Search", Toast.LENGTH_SHORT).show();
-                    return true;
-                } else if (item.getItemId() == R.id.menu_home_btn3) {
+
                     Intent intent = new Intent(HomeActivity.this, AddFriendActivity.class);
                     startActivity(intent);
+                    // Handle search click
+                    return true;
+                } else if (item.getItemId() == R.id.menu_home_btn3) {
+                    startActivity(new Intent(HomeActivity.this, FriendRequestActivity.class));
                     // Handle health click
-                    Toast.makeText(HomeActivity.this, "Health", Toast.LENGTH_SHORT).show();
                     return true;
                 } else if (item.getItemId() == R.id.menu_home_btn4) {
                     startActivity(new Intent(HomeActivity.this,ProfileActivity.class));
                     // Handle profile click
-                    Toast.makeText(HomeActivity.this, "Profile", Toast.LENGTH_SHORT).show();
                     return true;
                 }
                 return false;

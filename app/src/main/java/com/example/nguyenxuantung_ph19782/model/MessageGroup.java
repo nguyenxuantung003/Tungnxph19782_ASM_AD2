@@ -1,31 +1,46 @@
 package com.example.nguyenxuantung_ph19782.model;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class MessageGroup {
-    private String userId;
-    private String text;
+    private String senderId;
+    private String messageText;
+    private String timestamp; // Có thể thêm timestamp nếu cần
 
     public MessageGroup() {
+        // Constructor không tham số là bắt buộc
     }
 
-    public MessageGroup(String userId, String text) {
-        this.userId = userId;
-        this.text = text;
+    public MessageGroup(String senderId, String messageText) {
+        this.senderId = senderId;
+        this.messageText = messageText;
+        this.timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
     }
 
-    public String getUserId() {
-        return userId;
+    // Getter và Setter
+    public String getSenderId() {
+        return senderId;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setSenderId(String senderId) {
+        this.senderId = senderId;
     }
 
-    public String getText() {
-        return text;
+    public String getMessageText() {
+        return messageText;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setMessageText(String messageText) {
+        this.messageText = messageText;
+    }
+
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
     }
 }
-

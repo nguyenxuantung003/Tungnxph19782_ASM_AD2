@@ -10,15 +10,27 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:textSize="16sp" />
+        android:text="Name"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
+        android:background="@drawable/btn_login_loginactivity"
+        android:textStyle="bold"
+        android:textColor="@color/white"
         android:id="@+id/acceptButton"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Chấp nhận" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/btn_login_loginactivity"
+        android:textStyle="bold"
+        android:textColor="@color/white"
         android:id="@+id/rejectButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

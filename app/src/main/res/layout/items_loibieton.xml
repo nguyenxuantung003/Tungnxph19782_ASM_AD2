@@ -4,29 +4,49 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="16dp"
-    android:background="@color/teal_200">
+    android:background="@color/gray">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="end">
+        android:gravity="center_vertical"> <!-- Center vertically -->
 
-        <TextView
-            android:id="@+id/tvGratitudeNote"
-            android:layout_width="wrap_content"
+        <!-- LinearLayout bên trái -->
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textColor="@android:color/black"
             android:layout_weight="1"
-            android:paddingBottom="8dp" />
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tvGratitudeNote"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="titel"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:layout_weight="1"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:paddingBottom="8dp" />
+            <TextView
+                android:id="@+id/tvDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="date"
+                android:textStyle="italic"
+                android:textColor="@android:color/black" />
+        </LinearLayout>
 
+        <!-- LinearLayout bên phải -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnUpdate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -37,8 +57,9 @@
                 android:layout_marginStart="8dp"
                 android:onClick="onUpdateClick" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnDelete"
+                android:layout_marginTop="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@android:drawable/ic_menu_delete"
@@ -52,10 +73,5 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tvDate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="12sp"
-        android:textColor="@android:color/darker_gray" />
+
 </LinearLayout>

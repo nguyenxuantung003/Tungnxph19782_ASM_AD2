@@ -9,26 +9,27 @@ import android.widget.TextView;
 import com.example.nguyenxuantung_ph19782.R;
 
 import com.example.nguyenxuantung_ph19782.model.Message;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
 public class MessageAdapter extends ArrayAdapter<Message> {
-    private final Context context;
-    private final List<Message> messages;
 
     public MessageAdapter(Context context, List<Message> messages) {
-        super(context, R.layout.item_message, messages);
-        this.context = context;
-        this.messages = messages;
+        super(context, 0, messages);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.item_message, parent, false);
-        }
+        Message message = getItem(position);
 
-        Message message = messages.get(position);
+        if (convertView == null) {
+            if (message.getSenderId().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_message_sent, parent, false);
+            } else {
+                convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_message_received, parent, false);
+            }
+        }
 
         TextView messageTextView = convertView.findViewById(R.id.messageTextView);
         messageTextView.setText(message.getMessage());

@@ -77,7 +77,8 @@
                     android:gravity="center"
                     android:text="Lời Biết Ơn"
                     android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
@@ -108,8 +109,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Running"
-                    android:textSize="16sp" />
+                    android:text="Bạn bè"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
@@ -140,8 +143,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Fitness"
-                    android:textSize="16sp" />
+                    android:text="Nhóm"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
@@ -174,8 +179,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Cycling"
-                    android:textSize="16sp" />
+                    android:text="Đếm bước chân"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="20sp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
@@ -207,7 +214,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Dietary"
+                    android:text="Tập Luyện"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
                     android:textSize="16sp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>

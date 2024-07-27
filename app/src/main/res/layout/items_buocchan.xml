@@ -3,7 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="8dp">
+    android:padding="8dp"
+    android:background="@color/gray"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp">
 
     <TextView
         android:id="@+id/date_text_view"
@@ -21,6 +24,7 @@
         android:layout_height="wrap_content"
         android:text="Steps"
         android:textSize="20dp"
+        android:textStyle="italic"
         android:textColor="@color/black"
         android:layout_marginTop="20dp"/>
 </LinearLayout>

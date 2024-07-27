@@ -20,6 +20,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -81,7 +83,7 @@ public class ChatActivity extends AppCompatActivity {
 
     private void loadMessages() {
         DatabaseReference messagesRef = FirebaseDatabase.getInstance().getReference("messages").child(chatId);
-        messagesRef.addValueEventListener(new ValueEventListener() {
+        messagesRef.orderByChild("timestamp").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 messageList.clear();
@@ -91,6 +93,13 @@ public class ChatActivity extends AppCompatActivity {
                         messageList.add(message);
                     }
                 }
+                // Sắp xếp danh sách tin nhắn theo timestamp từ cũ đến mới
+                Collections.sort(messageList, new Comparator<Message>() {
+                    @Override
+                    public int compare(Message m1, Message m2) {
+                        return m1.getTimestamp().compareTo(m2.getTimestamp());
+                    }
+                });
                 messageAdapter.notifyDataSetChanged();
                 messagesListView.setSelection(messageList.size() - 1);
             }

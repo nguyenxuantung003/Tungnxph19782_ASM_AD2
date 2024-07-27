@@ -6,30 +6,36 @@
     android:padding="16dp">
 
     <TextView
-        android:id="@+id/usernameTextView"
+        android:id="@+id/userNameTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:text="User Name"
         android:textSize="16sp" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
+        android:background="@drawable/btn_login_loginactivity"
+        android:textColor="@color/white"
         android:id="@+id/sendRequestButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Kết bạn" />
 
-    <TextView
-        android:id="@+id/requestSentTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Đã gửi yêu cầu"
-        android:visibility="gone"
-        android:padding="8dp" />
-
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
+        android:background="@drawable/btn_login_loginactivity"
+        android:textColor="@color/white"
         android:id="@+id/acceptRequestButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Xác nhận"
-        android:visibility="gone" />
+        android:text="Đã gửi yêu cầu" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:background="@drawable/btn_login_loginactivity"
+        android:textColor="@color/white"
+        android:id="@+id/messageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nhắn tin" />
 </LinearLayout>

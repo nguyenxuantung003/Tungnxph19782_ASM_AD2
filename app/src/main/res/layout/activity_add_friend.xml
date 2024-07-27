@@ -3,17 +3,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <EditText
         android:id="@+id/searchEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Nhập tên người dùng"
+        android:background="@drawable/edit_text_loginactivity"
+        android:layout_marginTop="20dp"
         android:padding="16dp"
         android:textSize="16sp" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/searchButton"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
+        android:background="@drawable/btn_login_loginactivity"
+        android:textColor="@color/white"
         android:layout_height="wrap_content"
         android:layout_below="@id/searchEditText"
         android:layout_marginTop="8dp"

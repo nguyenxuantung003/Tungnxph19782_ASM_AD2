@@ -72,7 +72,12 @@ public class FriendRequestActivity extends AppCompatActivity {
                         friendRequestList.add(request);
                     }
                 }
-                friendRequestAdapter.notifyDataSetChanged();
+                if (friendRequestList.isEmpty()) {
+                    // Hiển thị thông báo khi không có lời mời kết bạn
+                    Toast.makeText(FriendRequestActivity.this, "Bạn không có lời mời kết bạn nào", Toast.LENGTH_SHORT).show();
+                } else {
+                    friendRequestAdapter.notifyDataSetChanged();
+                }
             }
 
             @Override

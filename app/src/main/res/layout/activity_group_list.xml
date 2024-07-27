@@ -10,7 +10,9 @@
         android:layout_above="@+id/createGroupButton"
         android:layout_alignParentTop="true"/>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
+        android:background="@drawable/btn_login_loginactivity"
+        android:textColor="@color/white"
         android:id="@+id/createGroupButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

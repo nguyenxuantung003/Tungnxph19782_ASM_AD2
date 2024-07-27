@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -51,6 +52,14 @@ public class AddFriendActivity extends AppCompatActivity {
             public void onAcceptRequestClick(Users user) {
                 acceptFriendRequest(user.getUserId());
             }
+
+            @Override
+            public void onMessageClick(Users user) {
+                Intent intent = new Intent(AddFriendActivity.this, ChatActivity.class);
+                intent.putExtra("userId", user.getUserId());
+                startActivity(intent);
+            }
+
         });
 
         searchResultsRecyclerView.setLayoutManager(new LinearLayoutManager(this));

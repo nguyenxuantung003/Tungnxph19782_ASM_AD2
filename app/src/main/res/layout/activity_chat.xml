@@ -9,18 +9,26 @@
         android:layout_height="0dp"
         android:layout_above="@+id/messageEditText"
         android:layout_alignParentTop="true"
-        android:layout_margin="16dp"/>
+        android:layout_margin="16dp"
+        android:divider="@null"
+        />
 
     <EditText
+        android:layout_marginBottom="10dp"
         android:id="@+id/messageEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:background="@drawable/edit_text_loginactivity"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_toStartOf="@+id/sendButton"
         android:layout_weight="1"
         android:hint="Type a message"/>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/btn_login_loginactivity"
+        android:layout_marginRight="5dp"
+        android:textColor="@color/white"
         android:id="@+id/sendButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
