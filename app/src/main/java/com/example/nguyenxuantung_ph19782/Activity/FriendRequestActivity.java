@@ -69,14 +69,32 @@ public class FriendRequestActivity extends AppCompatActivity {
                     FriendRequest request = snapshot.getValue(FriendRequest.class);
                     if (request != null) {
                         request.setRequestId(snapshot.getKey()); // Đặt requestId từ Firebase key
-                        friendRequestList.add(request);
+
+                        // Lấy thông tin người gửi yêu cầu
+                        String fromUserId = request.getFrom();
+                        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users").child(fromUserId);
+                        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot userSnapshot) {
+                                FriendRequest user = userSnapshot.getValue(FriendRequest.class);
+                                if (user != null) {
+                                    request.setUserName(user.getFrom()); // Giả sử bạn đã thêm trường username vào FriendRequest
+                                    friendRequestList.add(request);
+                                    friendRequestAdapter.notifyDataSetChanged();
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                                // Xử lý lỗi nếu có
+                                Toast.makeText(FriendRequestActivity.this, "Lỗi khi tải thông tin người dùng", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
                 }
                 if (friendRequestList.isEmpty()) {
                     // Hiển thị thông báo khi không có lời mời kết bạn
                     Toast.makeText(FriendRequestActivity.this, "Bạn không có lời mời kết bạn nào", Toast.LENGTH_SHORT).show();
-                } else {
-                    friendRequestAdapter.notifyDataSetChanged();
                 }
             }
 

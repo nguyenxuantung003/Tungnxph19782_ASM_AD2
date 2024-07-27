@@ -1,51 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_gravity="center">
+
 
     <TextView
+        android:layout_gravity="center"
         android:id="@+id/steps_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="Steps: 0"
-        android:textSize="20sp"
         android:textColor="@color/black"
-        android:textStyle="bold"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"/>
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <TextView
+        android:layout_marginBottom="10dp"
+        android:layout_gravity="center"
         android:id="@+id/goal_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="Goal: 10000 steps"
-        android:textStyle="bold"
         android:textColor="@color/teal_200"
         android:textSize="18sp"
-        android:layout_below="@id/steps_text_view"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"/>
+        android:textStyle="bold" />
 
     <TextView
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
         android:id="@+id/status_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="Keep going! You can do it."
-        android:textStyle="italic"
         android:textColor="@color/black"
         android:textSize="18sp"
-        android:layout_below="@id/goal_text_view"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"/>
+        android:textStyle="italic" />
+    <EditText
+        android:layout_marginBottom="10dp"
+        android:id="@+id/goal_edit_text"
+        android:layout_width="match_parent"
+        android:background="@drawable/edit_text_loginactivity"
+
+        android:layout_height="50dp"
+        android:hint="Enter new step goal"
+        android:inputType="number" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:background="@drawable/btn_login_loginactivity"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:layout_gravity="center"
+        android:id="@+id/update_goal_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Update Goal" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/history_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:layout_below="@id/status_text_view"
         android:layout_marginTop="16dp"
         android:padding="16dp"
-        />
-</RelativeLayout>
+        android:paddingTop="10dp" />
+</LinearLayout>

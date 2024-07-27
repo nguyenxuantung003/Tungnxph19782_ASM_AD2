@@ -39,7 +39,7 @@ public class FriendRequestAdapter extends RecyclerView.Adapter<FriendRequestAdap
     @Override
     public void onBindViewHolder(@NonNull FriendRequestViewHolder holder, int position) {
         FriendRequest request = friendRequestList.get(position);
-        holder.usernameTextView.setText(request.getFrom()); // Hiển thị tên người gửi yêu cầu
+        holder.usernameTextView.setText(request.getUserName()); // Hiển thị tên người gửi yêu cầu
         holder.acceptButton.setOnClickListener(v -> onItemClickListener.onAcceptClick(request));
         holder.rejectButton.setOnClickListener(v -> onItemClickListener.onRejectClick(request));
     }

@@ -135,7 +135,7 @@ public class StatisticsActivity extends AppCompatActivity {
                         long mentalActivitiesCount = 0;
                         for (DataSnapshot activitySnapshot : snapshot.getChildren()) {
                             String date = activitySnapshot.child("date").getValue(String.class);
-                            if (isWithinTimeRange(date, timeRange)) {
+                            if (isWithinTimeRange2(date, timeRange)) {
                                 mentalActivitiesCount++;
                             }
                         }
@@ -188,6 +188,17 @@ public class StatisticsActivity extends AppCompatActivity {
 
     private boolean isWithinTimeRange(String dateString, String timeRange) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        try {
+            Date date = sdf.parse(dateString);
+            return date.getTime() >= getStartDateForTimeRange(timeRange);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    private boolean isWithinTimeRange2(String dateString, String timeRange) {
+        // Convert dateString to timestamp and compare with startDate
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
         try {
             Date date = sdf.parse(dateString);
             return date.getTime() >= getStartDateForTimeRange(timeRange);

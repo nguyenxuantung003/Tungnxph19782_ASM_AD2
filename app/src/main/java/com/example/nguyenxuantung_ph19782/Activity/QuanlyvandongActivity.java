@@ -17,6 +17,8 @@ import android.hardware.SensorListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,12 +49,17 @@ public class QuanlyvandongActivity extends AppCompatActivity implements SensorEv
     private Sensor stepCounterSensor;
     private boolean isSensorPresent;
     private int stepCount = 0;
-    private int stepGoal = 10000; // Default goal
+    private int stepGoal = 0; // Default goal
     private DatabaseReference databaseReference;
     private String userId;
     private static final int REQUEST_ACTIVITY_RECOGNITION_PERMISSION = 1;
     private BuocchanAdapter stepHistoryAdapter;
     private List<Buocchan> stepHistoryList = new ArrayList<>();
+
+
+    private EditText goalEditText;
+    private Button updateGoalButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +69,25 @@ public class QuanlyvandongActivity extends AppCompatActivity implements SensorEv
         goalTextView = findViewById(R.id.goal_text_view);
         statusTextView = findViewById(R.id.status_text_view);
         historyRecyclerView = findViewById(R.id.history_recycler_view);
+
+
+        goalEditText = findViewById(R.id.goal_edit_text);
+        updateGoalButton = findViewById(R.id.update_goal_button);
+
+        updateGoalButton.setOnClickListener(v -> {
+            String newGoalString = goalEditText.getText().toString();
+            if (!newGoalString.isEmpty()) {
+                try {
+                    int newGoal = Integer.parseInt(newGoalString);
+                    updateDailyGoal(newGoal);
+                } catch (NumberFormatException e) {
+                    Toast.makeText(this, "Invalid goal number", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(this, "Please enter a goal", Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
         // Setup RecyclerView
         stepHistoryAdapter = new BuocchanAdapter(stepHistoryList);
@@ -105,6 +131,23 @@ public class QuanlyvandongActivity extends AppCompatActivity implements SensorEv
         loadTodayStepData();
  
     }
+
+
+    private void updateDailyGoal(int newGoal) {
+        String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+        DatabaseReference userStepRef = FirebaseDatabase.getInstance().getReference("PhysicalActivities").child(userId).child(currentDate);
+
+        userStepRef.child("goal").setValue(newGoal).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                Toast.makeText(QuanlyvandongActivity.this, "Goal updated successfully", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(QuanlyvandongActivity.this, "Failed to update goal", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
+
 
     private void initializeStepData() {
         String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());

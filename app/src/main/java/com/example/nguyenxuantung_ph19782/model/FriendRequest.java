@@ -5,11 +5,10 @@ public class FriendRequest {
     private String from;
     private String to;
     private String status;
-
-    // Constructors, getters, and setters
+    private String userName; // Thêm trường này để lưu tên người dùng
 
     public FriendRequest() {
-        // Default constructor
+        // Required empty constructor for Firebase
     }
 
     public FriendRequest(String requestId, String from, String to, String status) {
@@ -19,6 +18,7 @@ public class FriendRequest {
         this.status = status;
     }
 
+    // Getter and Setter methods
     public String getRequestId() {
         return requestId;
     }
@@ -49,5 +49,13 @@ public class FriendRequest {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }
