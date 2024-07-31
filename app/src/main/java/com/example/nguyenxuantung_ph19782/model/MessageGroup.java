@@ -7,19 +7,21 @@ import java.util.Locale;
 public class MessageGroup {
     private String senderId;
     private String messageText;
-    private String timestamp; // Có thể thêm timestamp nếu cần
+    private String timestamp;
+    private String senderName;
+    // Có thể thêm timestamp nếu cần
+
 
     public MessageGroup() {
-        // Constructor không tham số là bắt buộc
     }
 
-    public MessageGroup(String senderId, String messageText) {
-        this.senderId = senderId;
+    public MessageGroup(String messageText, String senderId, String senderName, String timestamp) {
         this.messageText = messageText;
-        this.timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
+        this.senderId = senderId;
+        this.senderName = senderName;
+        this.timestamp = timestamp;
     }
 
-    // Getter và Setter
     public String getSenderId() {
         return senderId;
     }
@@ -42,5 +44,13 @@ public class MessageGroup {
 
     public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public String getSenderName() {
+        return senderName;
+    }
+
+    public void setSenderName(String senderName) {
+        this.senderName = senderName;
     }
 }

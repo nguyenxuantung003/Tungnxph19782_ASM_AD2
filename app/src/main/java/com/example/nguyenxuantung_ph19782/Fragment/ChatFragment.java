@@ -25,8 +25,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class ChatFragment extends Fragment {
 
@@ -93,13 +96,28 @@ public class ChatFragment extends Fragment {
             return;
         }
 
-        String messageId = messagesRef.push().getKey();
-        MessageGroup message = new MessageGroup(FirebaseAuth.getInstance().getCurrentUser().getUid(), messageText);
-        messagesRef.child(messageId).setValue(message).addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                messageEditText.setText("");
-            } else {
-                Toast.makeText(getContext(), "Error sending message", Toast.LENGTH_SHORT).show();
+        String currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users").child(currentUserId);
+
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String senderName = dataSnapshot.child("username").getValue(String.class);
+                String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
+                String messageId = messagesRef.push().getKey();
+                MessageGroup messageGroup = new MessageGroup(messageText,currentUserId,senderName,timestamp);
+                messagesRef.child(messageId).setValue(messageGroup).addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        messageEditText.setText("");
+                    } else {
+                        Toast.makeText(getContext(), "Error sending message", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle error if necessary
             }
         });
     }

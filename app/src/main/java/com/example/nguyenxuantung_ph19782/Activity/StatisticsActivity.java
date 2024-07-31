@@ -29,7 +29,12 @@ import java.util.Set;
 
 public class StatisticsActivity extends AppCompatActivity {
 
-    private TextView tvFriendsCount, tvStepsCount, tvGoalsCompleted, tvMentalActivitiesCount, tvPhysicalActivitiesCount;
+
+
+    // phai tim hieu ve analytic
+    // thủ thuật sài chatgpt : đuôi phiên bản mới nhất , kèm  đường dẫn phiên bản mới nhất
+
+    private TextView tvFriendsCount, tvStepsCount, tvGoalsCompleted, tvMentalActivitiesCount, tvPhysicalActivitiesCount,tvCalo;
     private Spinner spinnerTimeRange;
     private DatabaseReference databaseReference;
     private String userId;
@@ -45,8 +50,8 @@ public class StatisticsActivity extends AppCompatActivity {
         tvGoalsCompleted = findViewById(R.id.tvGoalsCompleted);
         tvMentalActivitiesCount = findViewById(R.id.tvMentalActivitiesCount);
         tvPhysicalActivitiesCount = findViewById(R.id.tvPhysicalActivitiesCount);
+        tvCalo = findViewById(R.id.tvCalo);
         spinnerTimeRange = findViewById(R.id.spinnerTimeRange);
-
         userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
@@ -95,6 +100,8 @@ public class StatisticsActivity extends AppCompatActivity {
                         stepsCount += steps;
                     }
                 }
+                float caloi = (float) (stepsCount * 0.05);
+                tvCalo.setText("So calo da tieu thu :" + caloi);
                 tvStepsCount.setText("Số bước chân đã đi được :" + stepsCount);
             }
 

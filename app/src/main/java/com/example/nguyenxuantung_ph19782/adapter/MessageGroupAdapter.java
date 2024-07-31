@@ -80,11 +80,12 @@ public class MessageGroupAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     static class MyMessageViewHolder extends RecyclerView.ViewHolder {
-        TextView messageTextView;
+        TextView messageTextView,messageTextViewname;
 
         MyMessageViewHolder(View itemView) {
             super(itemView);
             messageTextView = itemView.findViewById(R.id.messageTextView);
+            messageTextViewname = itemView.findViewById(R.id.messageTextViewname);
         }
 
         void bind(MessageGroup message) {
@@ -93,15 +94,18 @@ public class MessageGroupAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     static class OtherMessageViewHolder extends RecyclerView.ViewHolder {
-        TextView messageTextView;
+        TextView messageTextView,messageTextViewname;
 
         OtherMessageViewHolder(View itemView) {
             super(itemView);
             messageTextView = itemView.findViewById(R.id.messageTextView);
+            messageTextViewname = itemView.findViewById(R.id.messageTextViewname);
         }
 
         void bind(MessageGroup message) {
+
             messageTextView.setText(message.getMessageText());
+            messageTextViewname.setText(message.getSenderName());
         }
     }
 }

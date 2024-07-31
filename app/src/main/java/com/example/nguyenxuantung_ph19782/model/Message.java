@@ -5,15 +5,17 @@ public class Message {
     private String receiverId;
     private String message;
     private String timestamp;
+    private String senderName;
 
     public Message() {
     }
 
-    public Message(String senderId, String receiverId, String message, String timestamp) {
+    public Message(String senderId, String receiverId, String message, String timestamp, String senderName) {
         this.senderId = senderId;
         this.receiverId = receiverId;
         this.message = message;
         this.timestamp = timestamp;
+        this.senderName = senderName;
     }
 
     public String getSenderId() {
@@ -46,5 +48,13 @@ public class Message {
 
     public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public String getSenderName() {
+        return senderName;
+    }
+
+    public void setSenderName(String senderName) {
+        this.senderName = senderName;
     }
 }
