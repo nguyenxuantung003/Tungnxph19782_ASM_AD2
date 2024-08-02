@@ -19,6 +19,15 @@
         android:theme="@style/Theme.NguyenXuanTung_Ph19782"
         tools:targetApi="31">
         <activity
+            android:name=".ChatGPT.MainChatGPTActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".Activity.StatisticsActivity"
             android:exported="false" />
         <activity
@@ -35,12 +44,6 @@
             android:exported="false" />
         <activity
             android:name=".Activity.GroupDetailActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activity.CreateGroupGoalActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activity.GroupGoalsActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.GroupListActivity"
@@ -84,11 +87,7 @@
         <activity
             android:name=".Activity.LoginActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"
