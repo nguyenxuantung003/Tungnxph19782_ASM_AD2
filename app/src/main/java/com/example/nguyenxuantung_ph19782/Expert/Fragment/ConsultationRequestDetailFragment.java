@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.nguyenxuantung_ph19782.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -62,9 +63,11 @@ public class ConsultationRequestDetailFragment extends Fragment {
 
     private void handleSendResponse(String requestId, String response) {
         if (requestId != null) {
+            String expertId = FirebaseAuth.getInstance().getCurrentUser().getUid();
             // Update the request in Firebase with the response and status
             requestRef.child(requestId).child("response").setValue(response);
-            requestRef.child(requestId).child("status").setValue("responded")
+            requestRef.child(requestId).child("status").setValue("responded");
+            requestRef.child(requestId).child("expertId").setValue(expertId)
                     .addOnSuccessListener(aVoid -> {
                         Toast.makeText(getContext(), "Response sent successfully", Toast.LENGTH_SHORT).show();
                         responseEditText.setText(""); // Clear the response field

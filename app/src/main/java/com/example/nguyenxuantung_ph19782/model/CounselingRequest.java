@@ -12,13 +12,12 @@ public class CounselingRequest implements Serializable {
     private String username;
     private String response;
     private String status;
+    private String expertId;
 
-    // Default constructor required for calls to DataSnapshot.getValue(CounselingRequest.class)
     public CounselingRequest() {
     }
 
-    // Constructor
-    public CounselingRequest(String requestId, String content, String createdAt, String email, String field, String userId, String username, String status, String response) {
+    public CounselingRequest(String requestId, String content, String createdAt, String email, String field, String userId, String username, String response, String status, String expertId) {
         this.requestId = requestId;
         this.content = content;
         this.createdAt = createdAt;
@@ -26,11 +25,11 @@ public class CounselingRequest implements Serializable {
         this.field = field;
         this.userId = userId;
         this.username = username;
-        this.status = status;
         this.response = response;
+        this.status = status;
+        this.expertId = expertId;
     }
 
-    // Getters and Setters
     public String getRequestId() {
         return requestId;
     }
@@ -101,5 +100,13 @@ public class CounselingRequest implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getExpertId() {
+        return expertId;
+    }
+
+    public void setExpertId(String expertId) {
+        this.expertId = expertId;
     }
 }

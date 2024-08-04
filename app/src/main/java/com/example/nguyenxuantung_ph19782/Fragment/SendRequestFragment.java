@@ -68,7 +68,7 @@ public class SendRequestFragment extends Fragment {
 
             // Kiểm tra xem requestId có null không
             if (requestId != null) {
-                CounselingRequest request = new CounselingRequest(requestId, content, getCurrentDateTime(), email, selectedField, userId, username, "pending", "");
+                CounselingRequest request = new CounselingRequest(requestId, content, getCurrentDateTime(), email, selectedField, userId, username, "pending", "pending","");
 
                 // Lưu yêu cầu với requestId là khóa
                 counselingRequestsRef.child(requestId).setValue(request)
