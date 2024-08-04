@@ -30,23 +30,15 @@ public class GroupListActivity extends AppCompatActivity {
     private ListView groupListView;
     private GroupAdapter groupAdapter;
     private List<Group> groupList;
-    private Button createGroupButton;
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_list);
-        ListView groupListView = findViewById(R.id.groupListView);
-        List<Group> groupList = new ArrayList<>();
-        createGroupButton = findViewById(R.id.createGroupButton);
-        createGroupButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(GroupListActivity.this,CreateGroupActivity.class));
-            }
-        });
-        GroupAdapter groupAdapter = new GroupAdapter(this, groupList, new GroupAdapter.OnItemClickListener() {
+        groupListView = findViewById(R.id.groupListView);
+        groupList = new ArrayList<>();
+        groupAdapter = new GroupAdapter(this, groupList, new GroupAdapter.OnItemClickListener() {
             @Override
             public void onJoinClick(Group group) {
                 joinGroup(group);
@@ -60,24 +52,23 @@ public class GroupListActivity extends AppCompatActivity {
 
         groupListView.setAdapter(groupAdapter);
 
-        loadGroups(groupAdapter);
+        loadGroups();
     }
-    private void loadGroups(GroupAdapter groupAdapter) {
-        DatabaseReference groupsRef = FirebaseDatabase.getInstance().getReference("groups");
+    private void loadGroups() {
+        DatabaseReference groupsRef = FirebaseDatabase.getInstance().getReference("Groups");
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         groupsRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                List<Group> groupList = new ArrayList<>();
+                groupList.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Group group = snapshot.getValue(Group.class);
                     if (group != null) {
                         groupList.add(group);
                     }
                 }
-                groupAdapter.clear();
-                groupAdapter.addAll(groupList);
+                groupAdapter.notifyDataSetChanged(); // Notify adapter about data changes
             }
 
             @Override
@@ -89,13 +80,13 @@ public class GroupListActivity extends AppCompatActivity {
 
     private void joinGroup(Group group) {
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        DatabaseReference groupRef = FirebaseDatabase.getInstance().getReference("groups").child(group.getGroupId());
+        DatabaseReference groupRef = FirebaseDatabase.getInstance().getReference("Groups").child(group.getGroupId());
         groupRef.child("members").child(userId).setValue(true)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         Toast.makeText(GroupListActivity.this, "Joined the group", Toast.LENGTH_SHORT).show();
                         // Refresh group list to update button text
-                        loadGroups((GroupAdapter) ((ListView) findViewById(R.id.groupListView)).getAdapter());
+                        loadGroups();
                     } else {
                         Toast.makeText(GroupListActivity.this, "Failed to join group", Toast.LENGTH_SHORT).show();
                     }

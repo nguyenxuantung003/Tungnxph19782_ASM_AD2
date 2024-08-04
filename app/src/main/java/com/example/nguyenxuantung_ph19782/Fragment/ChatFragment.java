@@ -61,7 +61,7 @@ public class ChatFragment extends Fragment {
         messagesRecyclerView.setAdapter(messageAdapter);
 
         groupId = getArguments().getString("groupId"); // Nhận groupId từ Bundle
-        messagesRef = FirebaseDatabase.getInstance().getReference("groups").child(groupId).child("messages");
+        messagesRef = FirebaseDatabase.getInstance().getReference("Groups").child(groupId).child("messages");
 
         loadMessages();
 
