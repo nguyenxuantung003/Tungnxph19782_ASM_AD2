@@ -15,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.nguyenxuantung_ph19782.Admin.Activity.AdminHomeActivity;
+import com.example.nguyenxuantung_ph19782.Expert.Activity.ExpertHomeActivity;
 import com.example.nguyenxuantung_ph19782.R;
 import com.example.nguyenxuantung_ph19782.model.Users;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -48,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextView tv;
     private ImageView imgbtngg;
     private GoogleSignInClient mgoogleSignInClient;
-    private int RC_SIGN_IN = 20;
+    private int RC_SIGN_IN = 1;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -60,6 +62,10 @@ public class LoginActivity extends AppCompatActivity {
         btnlogin = findViewById(R.id.btnlogin);
         tv = findViewById(R.id.tvlogintosingup);
         imgbtngg = findViewById(R.id.imagebtngoogle);
+
+        tv.setOnClickListener(v -> {
+            startActivity(new Intent(LoginActivity.this,SingupActivity.class));
+        });
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
         mdatabase = database.getReference();
@@ -117,44 +123,92 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
     }
-    private void checkUserProfile(FirebaseUser user) {
-        if (user != null) {
-            String userId = user.getUid();
-            mdatabase.child("Users").child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if (snapshot.exists()) {
-                        // Kiểm tra xem profile có đầy đủ thông tin hay không
-                        boolean hasCompleteProfile = snapshot.child("profile").exists()
-                                && snapshot.child("profile").child("gender").exists()
-                                && snapshot.child("profile").child("height").exists()
-                                && snapshot.child("profile").child("weight").exists()
-                                && snapshot.child("profile").child("bmi").exists();
+//    private void checkUserProfile(FirebaseUser user) {
+//        if (user != null) {
+//            String userId = user.getUid();
+//            mdatabase.child("Users").child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                    if (snapshot.exists()) {
+//                        // Kiểm tra xem profile có đầy đủ thông tin hay không
+//                        boolean hasCompleteProfile = snapshot.child("profile").exists()
+//                                && snapshot.child("profile").child("gender").exists()
+//                                && snapshot.child("profile").child("height").exists()
+//                                && snapshot.child("profile").child("weight").exists()
+//                                && snapshot.child("profile").child("bmi").exists();
+//
+//                        if (hasCompleteProfile) {
+//                            // Chuyển đến màn hình chính
+//                            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+//                            startActivity(intent);
+//                            finish();
+//                        } else {
+//                            // Chuyển đến màn hình cập nhật profile
+//                            Intent intent = new Intent(LoginActivity.this, FristUpdateProfileActivity.class);
+//                            startActivity(intent);
+//                            finish();
+//                        }
+//                    } else {
+//                        // Trường hợp người dùng mới, lưu thông tin cơ bản và chuyển đến màn hình cập nhật profile
+//                        saveUserData(user);
+//                    }
+//                }
+//
+//                @Override
+//                public void onCancelled(@NonNull DatabaseError error) {
+//                    // Handle possible errors.
+//                }
+//            });
+//        }
+//    }
+private void checkUserProfile(FirebaseUser user) {
+    if (user != null) {
+        String userId = user.getUid();
+        mdatabase.child("Users").child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    String role = snapshot.child("role").getValue(String.class);
+                    boolean hasCompleteProfile = snapshot.child("profile").exists()
+                            && snapshot.child("profile").child("gender").exists()
+                            && snapshot.child("profile").child("height").exists()
+                            && snapshot.child("profile").child("weight").exists()
+                            && snapshot.child("profile").child("bmi").exists();
 
-                        if (hasCompleteProfile) {
-                            // Chuyển đến màn hình chính
-                            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                            startActivity(intent);
-                            finish();
+                    Intent intent = null;
+                    if (hasCompleteProfile) {
+                        if ("user".equalsIgnoreCase(role)) {
+                            // Người dùng thông thường
+                            intent = new Intent(LoginActivity.this, HomeActivity.class);
+                        } else if ("expert".equalsIgnoreCase(role)) {
+                            // Chuyên gia
+                            intent = new Intent(LoginActivity.this, ExpertHomeActivity.class);
+                        } else if ("admin".equalsIgnoreCase(role)) {
+                            // Quản trị viên
+                            intent = new Intent(LoginActivity.this, AdminHomeActivity.class);
                         } else {
-                            // Chuyển đến màn hình cập nhật profile
-                            Intent intent = new Intent(LoginActivity.this, FristUpdateProfileActivity.class);
-                            startActivity(intent);
-                            finish();
+                            // Vai trò không xác định
+                            Toast.makeText(LoginActivity.this,"Khong xac dinh duoc vai tro",Toast.LENGTH_SHORT).show();
                         }
                     } else {
-                        // Trường hợp người dùng mới, lưu thông tin cơ bản và chuyển đến màn hình cập nhật profile
-                        saveUserData(user);
+                        // Hồ sơ chưa đầy đủ, chuyển đến màn hình cập nhật profile
+                        intent = new Intent(LoginActivity.this, FristUpdateProfileActivity.class);
                     }
+                    startActivity(intent);
+                    finish();
+                } else {
+                    // Người dùng mới, lưu thông tin cơ bản và chuyển đến màn hình cập nhật profile
+                    saveUserData(user);
                 }
+            }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    // Handle possible errors.
-                }
-            });
-        }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Xử lý lỗi nếu có
+            }
+        });
     }
+}
     private void saveUserData(FirebaseUser user) {
         String userId = user.getUid();
         String username = user.getDisplayName();
@@ -164,7 +218,7 @@ public class LoginActivity extends AppCompatActivity {
         String updatedAt = createdAt; // Khởi tạo updatedAt bằng createdAt ban đầu
 
         // Tạo một đối tượng User để lưu vào Firebase Realtime Database
-        Users newUser = new Users(userId, username,"", email, createdAt, updatedAt);
+        Users newUser = new Users(userId, username,"", email, createdAt, updatedAt,profileUrl);
 
         // Lưu thông tin vào Firebase Realtime Database
         DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);

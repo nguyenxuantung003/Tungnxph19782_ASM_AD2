@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_yeucautuvan"
+        android:title="Yêu cầu tư vấn"
+        android:icon="@drawable/icon_home"/>
+    <item
+        android:id="@+id/nav_chatvoinguoidung"
+        android:title="Trò chuyện với người dùng"
+        android:icon="@drawable/icon_home"/>
+    <item
+        android:id="@+id/nav_nhom"
+        android:title="Nhóm"
+        android:icon="@drawable/icon_home"/>
+    <item
+        android:id="@+id/nav_thongke"
+        android:title="Thống kê"
+        android:icon="@drawable/icon_home"/>
+</menu>

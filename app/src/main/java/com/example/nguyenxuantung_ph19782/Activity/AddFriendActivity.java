@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -64,12 +66,26 @@ public class AddFriendActivity extends AppCompatActivity {
 
         searchResultsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         searchResultsRecyclerView.setAdapter(userAdapter);
+        searchEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // Không cần xử lý
+            }
 
-        searchButton.setOnClickListener(v -> searchUsers());
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                searchUsers(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // Không cần xử lý
+            }
+        });
+        //searchButton.setOnClickListener(v -> searchUsers());
     }
 
-    private void searchUsers() {
-        String searchText = searchEditText.getText().toString();
+    private void searchUsers(String searchText) {
         DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("Users");
         Query query = usersRef.orderByChild("username").startAt(searchText).endAt(searchText + "\uf8ff");
         query.addListenerForSingleValueEvent(new ValueEventListener() {

@@ -40,7 +40,7 @@ public class HomeActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(HomeActivity.this, FriendsListActivity.class));
+                startActivity(new Intent(HomeActivity.this, MentalCounselingActivity.class));
             }
         });
         cardView3.setOnClickListener(new View.OnClickListener() {

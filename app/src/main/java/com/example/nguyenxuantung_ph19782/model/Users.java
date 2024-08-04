@@ -1,23 +1,25 @@
 package com.example.nguyenxuantung_ph19782.model;
 
 public class Users {
-    public String userId;
-    public String username;
-    public String password;
-    public String email;
-    public String createdAt;
-    public String updatedAt;
+    private String userId;
+    private String username;
+    private String role;
+    private String email;
+    private String createdAt;
+    private String updatedAt;
+    private String profileUrl;
 
     public Users() {
     }
 
-    public Users(String userId, String username, String password, String email, String createdAt, String updatedAt) {
+    public Users(String userId, String username, String role, String email, String createdAt, String updatedAt, String profileUrl) {
         this.userId = userId;
         this.username = username;
-        this.password = password;
+        this.role = role;
         this.email = email;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.profileUrl = profileUrl;
     }
 
     public String getUserId() {
@@ -36,12 +38,12 @@ public class Users {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
+    public String getRole() {
+        return role;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getEmail() {
@@ -66,5 +68,13 @@ public class Users {
 
     public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getProfileUrl() {
+        return profileUrl;
+    }
+
+    public void setProfileUrl(String profileUrl) {
+        this.profileUrl = profileUrl;
     }
 }
