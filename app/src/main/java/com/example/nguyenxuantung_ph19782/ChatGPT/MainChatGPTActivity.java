@@ -102,7 +102,7 @@ public class MainChatGPTActivity extends AppCompatActivity {
         RequestBody body = RequestBody.create(jsonBody.toString(), JSON);
         Request request = new Request.Builder()
                 .url("https://api.openai.com/v1/completions")
-                .header("Authorization", "Bearer sk-MWKu4QKmX3yukv9SUGSnHX5t-Z_AwJ8RWqXrt03K8VT3BlbkFJGPhdDzP4kdXLUS05c4Ak-Ot8n03VkcVSX7RaQh3cQA") // Thay YOUR_API_KEY bằng API key của bạn
+                .header("Authorization", "Bearer ") // Thay YOUR_API_KEY bằng API key của bạn
                 .post(body)
                 .build();
 
