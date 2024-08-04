@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.hardware.Sensor;
@@ -19,9 +20,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.nguyenxuantung_ph19782.CircularProgressDrawable;
 import com.example.nguyenxuantung_ph19782.R;
 import com.example.nguyenxuantung_ph19782.adapter.BuocchanAdapter;
 import com.example.nguyenxuantung_ph19782.model.Buocchan;
@@ -48,8 +51,8 @@ public class QuanlyvandongActivity extends AppCompatActivity implements SensorEv
     private SensorManager sensorManager;
     private Sensor stepCounterSensor;
     private boolean isSensorPresent;
-    private int stepCount = 0;
-    private int stepGoal = 0; // Default goal
+    private int stepCount = 100;
+    private int stepGoal = 200; // Default goal
     private DatabaseReference databaseReference;
     private String userId;
     private static final int REQUEST_ACTIVITY_RECOGNITION_PERMISSION = 1;
@@ -60,10 +63,21 @@ public class QuanlyvandongActivity extends AppCompatActivity implements SensorEv
     private EditText goalEditText;
     private Button updateGoalButton;
 
+
+
+    private ImageView progressImageView;
+    private CircularProgressDrawable progressDrawable;
+
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quanlyvandong);
+
+
+        progressImageView = findViewById(R.id.progressImageView);
+        progressDrawable = new CircularProgressDrawable(100); // Giá trị tối đa là 100
+        progressImageView.setImageDrawable(progressDrawable);
 
         stepsTextView = findViewById(R.id.steps_text_view);
         goalTextView = findViewById(R.id.goal_text_view);
@@ -114,7 +128,7 @@ public class QuanlyvandongActivity extends AppCompatActivity implements SensorEv
         }
 
         // Get userId from FirebaseAuth
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+                                FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser != null) {
             userId = currentUser.getUid(); // Get user ID from FirebaseAuth
         } else {
@@ -129,7 +143,7 @@ public class QuanlyvandongActivity extends AppCompatActivity implements SensorEv
         loadStepGoal();
         loadStepHistory();
         loadTodayStepData();
- 
+
     }
 
 
@@ -223,6 +237,8 @@ public class QuanlyvandongActivity extends AppCompatActivity implements SensorEv
                     stepsTextView.setText("Steps: " + todayStepData.getStepsCount());
                     goalTextView.setText("Goal: " + todayStepData.getGoal() + " steps");
                     statusTextView.setText(todayStepData.isGoalAchieved() ? "Goal achieved!" : "Keep going! " + (todayStepData.getGoal() - todayStepData.getStepsCount()) + " steps remaining.");
+                    int progress = (int) ((double) todayStepData.getStepsCount() / todayStepData.getGoal() * 100);
+                    progressDrawable.setProgress(progress);
                 } else {
                     stepsTextView.setText("Steps: 0");
                     goalTextView.setText("Goal: " + stepGoal + " steps");
@@ -259,6 +275,8 @@ public class QuanlyvandongActivity extends AppCompatActivity implements SensorEv
         if (event.sensor.getType() == Sensor.TYPE_STEP_COUNTER) {
             stepCount = (int) event.values[0];
             stepsTextView.setText("Steps: " + stepCount);
+            int progress = (int) ((double) stepCount / stepGoal * 100);
+            progressDrawable.setProgress(progress);
 
             if (stepCount >= stepGoal) {
                 statusTextView.setText("Goal achieved!");
