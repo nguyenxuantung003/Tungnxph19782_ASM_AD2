@@ -21,9 +21,10 @@
 
         <!-- Nội dung chính của Activity -->
         <FrameLayout
-            android:id="@+id/content_frame"
+            android:id="@+id/frg_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_below="@id/toolbar"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

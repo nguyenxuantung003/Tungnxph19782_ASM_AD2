@@ -1,39 +1,58 @@
 package com.example.nguyenxuantung_ph19782.model;
 
-public class CounselingRequest {
-    private String userId;
-    private String username;
-    private String email;
-    private String field;
+import java.io.Serializable;
+
+public class CounselingRequest implements Serializable {
+    private String requestId;
     private String content;
     private String createdAt;
+    private String email;
+    private String field;
+    private String userId;
+    private String username;
+    private String response;
+    private String status;
 
+    // Default constructor required for calls to DataSnapshot.getValue(CounselingRequest.class)
     public CounselingRequest() {
     }
 
-    public CounselingRequest(String userId, String username, String email, String field, String content, String createdAt) {
-        this.userId = userId;
-        this.username = username;
-        this.email = email;
-        this.field = field;
+    // Constructor
+    public CounselingRequest(String requestId, String content, String createdAt, String email, String field, String userId, String username, String status, String response) {
+        this.requestId = requestId;
         this.content = content;
         this.createdAt = createdAt;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
+        this.email = email;
+        this.field = field;
         this.userId = userId;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
         this.username = username;
+        this.status = status;
+        this.response = response;
+    }
+
+    // Getters and Setters
+    public String getRequestId() {
+        return requestId;
+    }
+
+    public void setRequestId(String requestId) {
+        this.requestId = requestId;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
     }
 
     public String getEmail() {
@@ -52,19 +71,35 @@ public class CounselingRequest {
         this.field = field;
     }
 
-    public String getContent() {
-        return content;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    public String getCreatedAt() {
-        return createdAt;
+    public String getUsername() {
+        return username;
     }
 
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getResponse() {
+        return response;
+    }
+
+    public void setResponse(String response) {
+        this.response = response;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

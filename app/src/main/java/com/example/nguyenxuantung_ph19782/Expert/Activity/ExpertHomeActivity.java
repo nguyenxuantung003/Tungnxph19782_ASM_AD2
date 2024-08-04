@@ -1,5 +1,6 @@
 package com.example.nguyenxuantung_ph19782.Expert.Activity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,6 +31,7 @@ public class ExpertHomeActivity extends AppCompatActivity implements NavigationV
     private ActionBarDrawerToggle toggle;
 
     @Override
+    @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_expert_home);
@@ -100,7 +102,7 @@ public class ExpertHomeActivity extends AppCompatActivity implements NavigationV
     private void loadFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.content_frame, fragment);
+        fragmentTransaction.replace(R.id.frg_container, fragment);
         fragmentTransaction.commit();
     }
 }
