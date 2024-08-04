@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -107,6 +108,12 @@ public class QuanlyvandongActivity extends AppCompatActivity implements SensorEv
         stepHistoryAdapter = new BuocchanAdapter(stepHistoryList);
         historyRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         historyRecyclerView.setAdapter(stepHistoryAdapter);
+
+        stepHistoryAdapter.setOnItemClickListener(date -> {
+            Intent intent = new Intent(QuanlyvandongActivity.this, LichsubuocchanActivity.class);
+            intent.putExtra("selectedDate", date);
+            startActivity(intent);
+        });
 
 
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);

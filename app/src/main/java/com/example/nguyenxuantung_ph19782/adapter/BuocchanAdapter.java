@@ -15,6 +15,15 @@ import java.util.List;
 public class BuocchanAdapter extends RecyclerView.Adapter<BuocchanAdapter.StepHistoryViewHolder> {
 
     private List<Buocchan> stepHistoryList;
+    private OnItemClickListener listener;
+
+    public interface OnItemClickListener {
+        void onItemClick(String date);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
 
     public BuocchanAdapter(List<Buocchan> stepHistoryList) {
         this.stepHistoryList = stepHistoryList;
@@ -35,6 +44,11 @@ public class BuocchanAdapter extends RecyclerView.Adapter<BuocchanAdapter.StepHi
         Buocchan stepHistory = stepHistoryList.get(position);
         holder.dateTextView.setText(stepHistory.getDate());
         holder.stepsTextView.setText(String.valueOf(stepHistory.getStepsCount()));
+        holder.itemView.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.onItemClick(stepHistory.getDate());
+            }
+        });
     }
 
     @Override
