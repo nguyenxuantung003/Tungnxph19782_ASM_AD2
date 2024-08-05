@@ -40,7 +40,6 @@ public class LoiBietOnAdapter extends ArrayAdapter<Loibieton> {
             viewHolder = new ViewHolder();
             viewHolder.tvGratitudeNote = convertView.findViewById(R.id.tvGratitudeNote);
             viewHolder.tvDate = convertView.findViewById(R.id.tvDate);
-            viewHolder.btnUpdate = convertView.findViewById(R.id.btnUpdate);
             viewHolder.btnDelete = convertView.findViewById(R.id.btnDelete);
             convertView.setTag(viewHolder);
         } else {
@@ -60,14 +59,6 @@ public class LoiBietOnAdapter extends ArrayAdapter<Loibieton> {
             e.printStackTrace();
             viewHolder.tvDate.setText(dateString);
         }
-        viewHolder.btnUpdate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (listener != null) {
-                    listener.onUpdateClicked(mentalActivity);
-                }
-            }
-        });
 
         // Set click listener for delete button
         viewHolder.btnDelete.setOnClickListener(new View.OnClickListener() {
@@ -85,7 +76,6 @@ public class LoiBietOnAdapter extends ArrayAdapter<Loibieton> {
         TextView tvGratitudeNote;
         TextView tvDate;
         Button btnDelete;
-        Button btnUpdate;
     }
     public interface OnItemActionListener {
         void onUpdateClicked(Loibieton item);

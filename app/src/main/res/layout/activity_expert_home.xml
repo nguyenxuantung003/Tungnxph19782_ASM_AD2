@@ -9,22 +9,13 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hallo"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:textSize="30sp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"/>
 
         <!-- Nội dung chính của Activity -->
         <FrameLayout
             android:id="@+id/frg_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/toolbar"/>
+            android:layout_marginTop="20dp"/> <!-- Tạo khoảng cách từ dưới TextView -->
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
@@ -35,4 +26,5 @@
         android:layout_gravity="start"
         app:menu="@menu/menuhome_chuyengia"
         app:headerLayout="@layout/nav_layout" />
+
 </androidx.drawerlayout.widget.DrawerLayout>

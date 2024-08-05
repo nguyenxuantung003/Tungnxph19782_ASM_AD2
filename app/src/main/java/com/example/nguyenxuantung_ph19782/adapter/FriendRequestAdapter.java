@@ -14,34 +14,34 @@ import com.example.nguyenxuantung_ph19782.R;
 
 import java.util.List;
 
-public class FriendRequestAdapter extends RecyclerView.Adapter<FriendRequestAdapter.FriendRequestViewHolder> {
+public class FriendRequestAdapter extends RecyclerView.Adapter<FriendRequestAdapter.ViewHolder> {
 
     private List<FriendRequest> friendRequestList;
-    private OnItemClickListener onItemClickListener;
+    private OnItemClickListener listener;
 
     public interface OnItemClickListener {
-        void onAcceptClick(FriendRequest request);
-        void onRejectClick(FriendRequest request);
+        void onAcceptClick(FriendRequest friendRequest);
+        void onRejectClick(FriendRequest friendRequest);
     }
 
-    public FriendRequestAdapter(List<FriendRequest> friendRequestList, OnItemClickListener onItemClickListener) {
+    public FriendRequestAdapter(List<FriendRequest> friendRequestList, OnItemClickListener listener) {
         this.friendRequestList = friendRequestList;
-        this.onItemClickListener = onItemClickListener;
+        this.listener = listener;
     }
 
     @NonNull
     @Override
-    public FriendRequestViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_friend_request, parent, false);
-        return new FriendRequestViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FriendRequestViewHolder holder, int position) {
-        FriendRequest request = friendRequestList.get(position);
-        holder.usernameTextView.setText(request.getUserName()); // Hiển thị tên người gửi yêu cầu
-        holder.acceptButton.setOnClickListener(v -> onItemClickListener.onAcceptClick(request));
-        holder.rejectButton.setOnClickListener(v -> onItemClickListener.onRejectClick(request));
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        FriendRequest friendRequest = friendRequestList.get(position);
+        holder.userNameTextView.setText(friendRequest.getUserName()); // Assuming you have a TextView named userNameTextView in item_friend_request.xml
+        holder.acceptButton.setOnClickListener(v -> listener.onAcceptClick(friendRequest));
+        holder.rejectButton.setOnClickListener(v -> listener.onRejectClick(friendRequest));
     }
 
     @Override
@@ -49,16 +49,17 @@ public class FriendRequestAdapter extends RecyclerView.Adapter<FriendRequestAdap
         return friendRequestList.size();
     }
 
-    public static class FriendRequestViewHolder extends RecyclerView.ViewHolder {
-        TextView usernameTextView;
-        Button acceptButton;
-        Button rejectButton;
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        public TextView userNameTextView;
+        public Button acceptButton;
+        public Button rejectButton;
 
-        public FriendRequestViewHolder(@NonNull View itemView) {
+        public ViewHolder(View itemView) {
             super(itemView);
-            usernameTextView = itemView.findViewById(R.id.usernameTextView);
+            userNameTextView = itemView.findViewById(R.id.usernamefriendrequest); // Assuming you have a TextView with this ID in item_friend_request.xml
             acceptButton = itemView.findViewById(R.id.acceptButton);
             rejectButton = itemView.findViewById(R.id.rejectButton);
         }
     }
 }
+

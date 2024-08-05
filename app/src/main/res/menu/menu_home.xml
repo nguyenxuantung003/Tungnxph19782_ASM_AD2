@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/menu_home_btn1"
-        android:icon="@drawable/icon_home"
+        android:icon="@drawable/iconhomeeee"
         android:title="Trang chủ" />
     <item
         android:id="@+id/menu_home_btn2"
@@ -10,14 +10,14 @@
         android:title="Tìm kiếm" />
     <item
         android:id="@+id/menu_home_btn3"
-        android:icon="@drawable/icon_health"
-        android:title="kết bạn" />
+        android:icon="@drawable/iconfriend2"
+        android:title="bạn bè" />
     <item
         android:id="@+id/menu_home_btn4"
-        android:icon="@drawable/icon_profile"
+        android:icon="@drawable/iconprofile2"
         android:title="Thông tin" />
     <item
         android:id="@+id/menu_home_btn5"
-        android:icon="@drawable/ic_launcher_background"
+        android:icon="@drawable/iconthongke2"
         android:title="Thống kê" />
 </menu>

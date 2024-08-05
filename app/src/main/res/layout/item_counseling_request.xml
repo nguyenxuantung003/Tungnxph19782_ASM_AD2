@@ -2,9 +2,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp">
+    android:layout_marginTop="10dp"
+    android:background="@drawable/box_background">
 
     <TextView
+        android:textColor="@color/black"
         android:id="@+id/tvUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -12,11 +14,14 @@
         android:textStyle="bold" />
 
     <TextView
+        android:textColor="@color/black"
+        android:textStyle="italic"
         android:id="@+id/tvContent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvUsername"
         android:textSize="14sp"
+        android:layout_marginBottom="5dp"
         android:layout_marginTop="4dp" />
 
 </RelativeLayout>

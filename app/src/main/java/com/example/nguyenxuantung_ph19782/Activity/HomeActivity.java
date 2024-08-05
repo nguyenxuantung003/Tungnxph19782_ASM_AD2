@@ -93,7 +93,7 @@ public class HomeActivity extends AppCompatActivity {
                     // Handle search click
                     return true;
                 } else if (item.getItemId() == R.id.menu_home_btn3) {
-                    startActivity(new Intent(HomeActivity.this, FriendRequestActivity.class));
+                    startActivity(new Intent(HomeActivity.this, FriendActivity.class));
                     // Handle health click
                     return true;
                 } else if (item.getItemId() == R.id.menu_home_btn4) {

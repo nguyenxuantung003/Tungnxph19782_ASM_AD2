@@ -5,14 +5,18 @@
     android:padding="16dp">
 
     <TextView
+        android:textColor="@color/black"
         android:id="@+id/tvRequestTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Request Title"
+        android:text="Câu hỏi của bạn :"
         android:textSize="18sp"
         android:textStyle="bold" />
 
     <TextView
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="italic"
         android:id="@+id/tvRequestContent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -21,16 +25,19 @@
         android:text="Request Content" />
 
     <TextView
+        android:textColor="@color/black"
         android:id="@+id/tvResponseTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvRequestContent"
         android:layout_marginTop="16dp"
-        android:text="Response Title"
+        android:text="Câu trả lời của chuyên gia :"
         android:textSize="18sp"
         android:textStyle="bold" />
 
     <TextView
+        android:textColor="@color/black"
+        android:textStyle="italic"
         android:id="@+id/tvResponseContent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

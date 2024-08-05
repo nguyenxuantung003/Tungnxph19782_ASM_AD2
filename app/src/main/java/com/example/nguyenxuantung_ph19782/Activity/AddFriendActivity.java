@@ -44,25 +44,7 @@ public class AddFriendActivity extends AppCompatActivity {
         searchResultsRecyclerView = findViewById(R.id.searchResultsRecyclerView);
 
         userList = new ArrayList<>();
-        userAdapter = new UserAdapter(userList, new UserAdapter.OnItemClickListener() {
-            @Override
-            public void onSendRequestClick(Users user) {
-                sendFriendRequest(user.getUserId());
-            }
 
-            @Override
-            public void onAcceptRequestClick(Users user) {
-                acceptFriendRequest(user.getUserId());
-            }
-
-            @Override
-            public void onMessageClick(Users user) {
-                Intent intent = new Intent(AddFriendActivity.this, ChatActivity.class);
-                intent.putExtra("userId", user.getUserId());
-                startActivity(intent);
-            }
-
-        });
 
         searchResultsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         searchResultsRecyclerView.setAdapter(userAdapter);

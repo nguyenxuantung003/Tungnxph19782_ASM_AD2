@@ -3,8 +3,9 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp"
-    android:background="@color/gray">
+    android:padding="10dp"
+    android:background="@color/gray"
+    android:layout_margin="10dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -45,28 +46,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnUpdate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:drawable/ic_menu_edit"
-                android:textColor="@android:color/white"
-                android:paddingHorizontal="16dp"
-                android:paddingVertical="8dp"
-                android:layout_marginStart="8dp"
-                android:onClick="onUpdateClick" />
-
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnDelete"
-                android:layout_marginTop="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@android:drawable/ic_menu_delete"
+                android:background="@drawable/iconxoa2"
                 android:textColor="@android:color/white"
-                android:paddingHorizontal="16dp"
-                android:paddingVertical="8dp"
-                android:layout_marginStart="8dp"
                 android:onClick="onDeleteClick" />
 
         </LinearLayout>

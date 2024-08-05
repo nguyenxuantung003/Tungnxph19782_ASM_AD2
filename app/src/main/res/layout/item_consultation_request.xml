@@ -3,14 +3,17 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="8dp">
+    android:padding="10dp"
+    android:layout_marginTop="10dp"
+    android:background="@drawable/box_background"> <!-- Thêm background box -->
 
     <TextView
         android:id="@+id/textViewTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Title"
-        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
     <TextView
@@ -18,5 +21,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Description"
-        android:textSize="14sp" />
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:textStyle="italic"
+        android:layout_marginTop="10dp"
+        android:maxLines="1"
+        android:ellipsize="end"/>
+
 </LinearLayout>

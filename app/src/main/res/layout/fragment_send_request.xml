@@ -11,6 +11,8 @@
         android:entries="@array/counseling_fields" />
 
     <EditText
+        android:background="@drawable/edit_text_loginactivity"
+        android:textSize="25sp"
         android:id="@+id/etCounselingContent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,7 +20,11 @@
         android:layout_marginTop="16dp"
         android:hint="Nội dung yêu cầu" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
+        android:background="@drawable/btn_login_loginactivity"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:layout_centerInParent="true"
         android:id="@+id/btnSendCounselingRequest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

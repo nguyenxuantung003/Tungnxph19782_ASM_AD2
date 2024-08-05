@@ -67,9 +67,9 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:src="@drawable/icon_viet" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/imageloibieton2" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -101,15 +101,15 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:src="@drawable/step" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/imageyeucau" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Bạn bè"
+                    android:text="Hỏi đáp"
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
@@ -135,9 +135,9 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:src="@drawable/finess" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/imagenhom2" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -171,9 +171,9 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:src="@drawable/cycling" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/imagebuocchan2" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -206,9 +206,9 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:src="@drawable/dietary" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/imagetapluyen2" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -241,9 +241,9 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:src="@drawable/sleep" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/imagebmi2" />
 
                 <TextView
                     android:layout_width="wrap_content"

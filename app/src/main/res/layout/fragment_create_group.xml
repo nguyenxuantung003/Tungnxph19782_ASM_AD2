@@ -1,24 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:layout_marginTop="20dp">
 
     <EditText
+        android:background="@drawable/edit_text_loginactivity"
+        android:textSize="25sp"
+        android:textColor="@color/black"
         android:id="@+id/editTextGroupName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Tên nhóm" />
 
     <EditText
+        android:background="@drawable/edit_text_loginactivity"
+        android:textSize="25sp"
+        android:textColor="@color/black"
         android:id="@+id/editTextGroupDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Mô tả nhóm"
         android:layout_marginTop="8dp" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
+        android:background="@drawable/btn_login_loginactivity"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"
         android:id="@+id/buttonCreateGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

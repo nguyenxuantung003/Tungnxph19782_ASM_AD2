@@ -74,11 +74,13 @@ public class SendRequestFragment extends Fragment {
                 counselingRequestsRef.child(requestId).setValue(request)
                         .addOnSuccessListener(aVoid -> {
                             Toast.makeText(getContext(), "Yêu cầu đã được gửi", Toast.LENGTH_SHORT).show();
+                            etCounselingContent.setText("");
                             // Thực hiện hành động sau khi gửi yêu cầu (ví dụ: quay lại hoặc làm mới dữ liệu)
                         })
                         .addOnFailureListener(e -> {
                             Toast.makeText(getContext(), "Lỗi: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                         });
+
             } else {
                 Toast.makeText(getContext(), "Lỗi: Không thể tạo requestId", Toast.LENGTH_SHORT).show();
             }

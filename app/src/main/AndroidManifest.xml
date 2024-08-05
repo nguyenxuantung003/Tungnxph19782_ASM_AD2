@@ -19,22 +19,7 @@
         android:theme="@style/Theme.NguyenXuanTung_Ph19782"
         tools:targetApi="31">
         <activity
-            android:name=".Expert.Activity.StatisticsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Expert.Activity.ChatWithUsersActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Expert.Activity.StatsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Expert.Activity.GroupsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Expert.Activity.ConversationsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Expert.Activity.ConsultationRequestsActivity"
+            android:name=".Activity.FriendActivity"
             android:exported="false" />
         <activity
             android:name=".Expert.Activity.ExpertRequestsActivity"

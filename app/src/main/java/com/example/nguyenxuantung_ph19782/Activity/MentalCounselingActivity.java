@@ -28,10 +28,10 @@ public class MentalCounselingActivity extends AppCompatActivity {
                     tab.setText("Gửi yêu cầu");
                     break;
                 case 1:
-                    tab.setText("Yêu cầu đã gửi");
+                    tab.setText("Đã gửi");
                     break;
                 case 2:
-                    tab.setText("Yêu cầu đã trả lời");
+                    tab.setText("Đã trả lời");
                     break;
             }
         }).attach();

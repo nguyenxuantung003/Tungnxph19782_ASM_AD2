@@ -9,8 +9,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.nguyenxuantung_ph19782.model.Users;
 import com.example.nguyenxuantung_ph19782.R;
+import com.example.nguyenxuantung_ph19782.model.Users;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -18,14 +18,16 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
 
     private List<Users> users;
     private OnItemClickListener onItemClickListener;
+    private Map<String, Boolean> friendsMap;
+    private Map<String, Boolean> requestSentMap;
 
     public interface OnItemClickListener {
         void onSendRequestClick(Users user);
@@ -33,9 +35,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         void onMessageClick(Users user);
     }
 
-    public UserAdapter(List<Users> users, OnItemClickListener onItemClickListener) {
+    public UserAdapter(List<Users> users, OnItemClickListener onItemClickListener, Map<String, Boolean> friendsMap, Map<String, Boolean> requestSentMap) {
         this.users = users;
         this.onItemClickListener = onItemClickListener;
+        this.friendsMap = friendsMap;
+        this.requestSentMap = requestSentMap;
     }
 
     @NonNull
@@ -45,7 +49,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         return new UserViewHolder(view);
     }
 
-    @Override
     public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
         Users user = users.get(position);
         holder.userNameTextView.setText(user.getUsername());
@@ -59,6 +62,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
+                    // Đã là bạn bè
                     holder.sendRequestButton.setVisibility(View.GONE);
                     holder.acceptRequestButton.setVisibility(View.GONE);
                     holder.messageButton.setVisibility(View.VISIBLE);
@@ -75,10 +79,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
                                 }
                             }
                             if (requestSent) {
+                                // Yêu cầu đã gửi nhưng chưa được chấp nhận
                                 holder.sendRequestButton.setVisibility(View.GONE);
                                 holder.acceptRequestButton.setVisibility(View.VISIBLE);
                                 holder.messageButton.setVisibility(View.GONE);
                             } else {
+                                // Chưa gửi yêu cầu
                                 holder.sendRequestButton.setVisibility(View.VISIBLE);
                                 holder.acceptRequestButton.setVisibility(View.GONE);
                                 holder.messageButton.setVisibility(View.GONE);
