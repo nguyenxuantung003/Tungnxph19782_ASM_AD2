@@ -6,8 +6,8 @@
         android:title="Trang chủ" />
     <item
         android:id="@+id/menu_home_btn2"
-        android:icon="@drawable/icon_searh"
-        android:title="Tìm kiếm" />
+        android:icon="@drawable/iconbangtin2"
+        android:title="Bảng tin" />
     <item
         android:id="@+id/menu_home_btn3"
         android:icon="@drawable/iconfriend2"

@@ -49,7 +49,6 @@ public class ProfileActivity extends AppCompatActivity {
         weightEditText = findViewById(R.id.weight);
         updateButton = findViewById(R.id.update_button);
         goiythucdonButton = findViewById(R.id.goi_y_thuc_don_btn);
-        logoutButton = findViewById(R.id.logout_button);
 
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(currentUser.getUid());
@@ -85,7 +84,6 @@ public class ProfileActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {}
         });
 
-        logoutButton.setOnClickListener(v -> logout());
 
     }
     private void loadUserInfo() {
@@ -142,30 +140,7 @@ public class ProfileActivity extends AppCompatActivity {
                 .addOnSuccessListener(aVoid -> Toast.makeText(ProfileActivity.this, "Profile updated", Toast.LENGTH_SHORT).show())
                 .addOnFailureListener(e -> Toast.makeText(ProfileActivity.this, "Failed to update profile", Toast.LENGTH_SHORT).show());
     }
-    private void logout() {
-        // Tạo và hiển thị hộp thoại xác nhận
-        new AlertDialog.Builder(this)
-                .setTitle("Xác nhận đăng xuất")
-                .setMessage("Bạn có chắc chắn muốn đăng xuất không?")
-                .setPositiveButton("Có", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // Thực hiện đăng xuất khi nhấn "Có"
-                        FirebaseAuth.getInstance().signOut();
-                        Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
-                        startActivity(intent);
-                        finish(); // Kết thúc Activity hiện tại
-                    }
-                })
-                .setNegativeButton("Không", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // Đóng hộp thoại khi nhấn "Không"
-                        dialog.dismiss();
-                    }
-                })
-                .show();
-    }
+
 
     private float calculateBMI(float weight, float height) {
         if (height == 0) return 0;

@@ -9,9 +9,14 @@
         android:id="@+id/postContent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="16sp" />
+        android:text="Content"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="30sp" />
 
     <TextView
+        android:layout_marginTop="5dp"
+        android:textSize="15sp"
         android:id="@+id/likeCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,9 +33,9 @@
         android:layout_height="wrap_content"
         android:hint="Add a comment" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/commentButton"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Comment" />
 

@@ -97,7 +97,7 @@ public class HomeActivity extends AppCompatActivity {
                     // Handle health click
                     return true;
                 } else if (item.getItemId() == R.id.menu_home_btn4) {
-                    startActivity(new Intent(HomeActivity.this,ProfileActivity.class));
+                    startActivity(new Intent(HomeActivity.this,MainActivityUserProfile.class));
                     // Handle profile click
                     return true;
                 } else if(item.getItemId() == R.id.menu_home_btn5){

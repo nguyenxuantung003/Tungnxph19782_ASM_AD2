@@ -1,19 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bảng tin"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:id="@+id/tvbangtin"
+        />
 
     <ListView
+        android:layout_below="@id/tvbangtin"
+        android:layout_marginTop="10dp"
         android:id="@+id/postsListView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:layout_weight="1"/>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
+        android:background="@drawable/btn_login_loginactivity"
+        android:textSize="20sp"
+        android:layout_below="@id/postsListView"
+        android:textColor="@color/white"
+        android:layout_marginTop="10dp"
         android:id="@+id/createPostButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Tạo bài viết"
-        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_margin="16dp" />
 </RelativeLayout>
