@@ -1,6 +1,7 @@
 package com.example.nguyenxuantung_ph19782.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.nguyenxuantung_ph19782.Activity.UserProfileActivity;
 import com.example.nguyenxuantung_ph19782.model.Users;
 
 import java.util.List;
@@ -42,6 +44,15 @@ public class FriendAdapter extends ArrayAdapter<Users> {
 
         usernameTextView.setText(user.getUsername());
         messageButton.setOnClickListener(v -> listener.onMessageClick(user));
+
+        // Thêm sự kiện click vào toàn bộ item để mở trang cá nhân
+        convertView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, UserProfileActivity.class);
+            intent.putExtra("userId", user.getUserId());
+            intent.putExtra("username", user.getUsername());
+            intent.putExtra("email", user.getEmail());
+            context.startActivity(intent);
+        });
 
         return convertView;
     }

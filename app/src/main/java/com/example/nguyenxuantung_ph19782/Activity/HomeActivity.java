@@ -88,7 +88,7 @@ public class HomeActivity extends AppCompatActivity {
                     return true;
                 } else if (item.getItemId() == R.id.menu_home_btn2) {
 
-                    Intent intent = new Intent(HomeActivity.this, AddFriendActivity.class);
+                    Intent intent = new Intent(HomeActivity.this, NewsFeedActivity.class);
                     startActivity(intent);
                     // Handle search click
                     return true;
