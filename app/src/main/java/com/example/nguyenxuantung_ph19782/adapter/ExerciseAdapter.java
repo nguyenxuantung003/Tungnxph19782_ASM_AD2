@@ -7,28 +7,25 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import com.example.nguyenxuantung_ph19782.R;
+import com.example.nguyenxuantung_ph19782.model.Exercise;
 
-public class ExerciseAdapter extends ArrayAdapter<String> {
+import java.util.List;
 
-    private final Context context;
-    private final String[] exercises;
+public class ExerciseAdapter extends ArrayAdapter<Exercise> {
 
-    public ExerciseAdapter(Context context, String[] exercises) {
-        super(context, R.layout.item_exercise, exercises);
-        this.context = context;
-        this.exercises = exercises;
+    public ExerciseAdapter(Context context, List<Exercise> exercises) {
+        super(context, 0, exercises);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            LayoutInflater inflater = (LayoutInflater) context
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.item_exercise, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_exercise, parent, false);
         }
 
-        TextView nameTextView = convertView.findViewById(R.id.exercise_name_item);
-        nameTextView.setText(exercises[position]);
+        Exercise exercise = getItem(position);
+        TextView nameTextView = convertView.findViewById(R.id.exercise_name);
+        nameTextView.setText(exercise.getName());
 
         return convertView;
     }

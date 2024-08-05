@@ -1,5 +1,4 @@
 package com.example.nguyenxuantung_ph19782.Activity;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -15,7 +14,6 @@ import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
-import android.hardware.SensorListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -42,30 +40,26 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.UUID;
 
 public class QuanlyvandongActivity extends AppCompatActivity implements SensorEventListener {
 
-    private TextView stepsTextView, goalTextView, statusTextView;
+    private TextView stepsTextView, goalTextView, statusTextView, caloriesTextView;
     private RecyclerView historyRecyclerView;
     private SensorManager sensorManager;
     private Sensor stepCounterSensor;
     private boolean isSensorPresent;
-    private int stepCount = 100;
+    private int stepCount = 0;
     private int stepGoal = 200; // Default goal
     private DatabaseReference databaseReference;
     private String userId;
     private static final int REQUEST_ACTIVITY_RECOGNITION_PERMISSION = 1;
     private BuocchanAdapter stepHistoryAdapter;
+    private double userWeight = 70.0; // Default weight
+    private DatabaseReference userRef;
     private List<Buocchan> stepHistoryList = new ArrayList<>();
-
-
     private EditText goalEditText;
     private Button updateGoalButton;
-
-
-
     private ImageView progressImageView;
     private CircularProgressDrawable progressDrawable;
 
@@ -75,17 +69,15 @@ public class QuanlyvandongActivity extends AppCompatActivity implements SensorEv
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quanlyvandong);
 
-
         progressImageView = findViewById(R.id.progressImageView);
-        progressDrawable = new CircularProgressDrawable(100); // Giá trị tối đa là 100
+        progressDrawable = new CircularProgressDrawable(100); // Max value is 100
         progressImageView.setImageDrawable(progressDrawable);
 
         stepsTextView = findViewById(R.id.steps_text_view);
         goalTextView = findViewById(R.id.goal_text_view);
         statusTextView = findViewById(R.id.status_text_view);
         historyRecyclerView = findViewById(R.id.history_recycler_view);
-
-
+        caloriesTextView = findViewById(R.id.calories_text_view);
         goalEditText = findViewById(R.id.goal_edit_text);
         updateGoalButton = findViewById(R.id.update_goal_button);
 
@@ -103,7 +95,6 @@ public class QuanlyvandongActivity extends AppCompatActivity implements SensorEv
             }
         });
 
-
         // Setup RecyclerView
         stepHistoryAdapter = new BuocchanAdapter(stepHistoryList);
         historyRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -115,7 +106,6 @@ public class QuanlyvandongActivity extends AppCompatActivity implements SensorEv
             startActivity(intent);
         });
 
-
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         if (sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER) != null) {
             stepCounterSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
@@ -126,22 +116,22 @@ public class QuanlyvandongActivity extends AppCompatActivity implements SensorEv
             isSensorPresent = false;
             Log.d("SensorCheck", "Step Counter Sensor is not available.");
         }
-            // xin quyền
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACTIVITY_RECOGNITION)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.ACTIVITY_RECOGNITION},
-                    REQUEST_ACTIVITY_RECOGNITION_PERMISSION);
+
+        // Request permission
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACTIVITY_RECOGNITION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACTIVITY_RECOGNITION}, REQUEST_ACTIVITY_RECOGNITION_PERMISSION);
+        } else {
+            registerStepSensor();
         }
 
         // Get userId from FirebaseAuth
-                                FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser != null) {
-            userId = currentUser.getUid(); // Get user ID from FirebaseAuth
+            userId = currentUser.getUid();
+            userRef = FirebaseDatabase.getInstance().getReference("Users").child(userId).child("profile");
         } else {
-            // Handle case where user is not logged in
             Toast.makeText(this, "User is not logged in", Toast.LENGTH_LONG).show();
-            finish(); // Exit the activity
+            finish();
             return;
         }
 
@@ -150,9 +140,14 @@ public class QuanlyvandongActivity extends AppCompatActivity implements SensorEv
         loadStepGoal();
         loadStepHistory();
         loadTodayStepData();
-
+        getUserWeight();
     }
 
+    private void registerStepSensor() {
+        if (isSensorPresent) {
+            sensorManager.registerListener(this, stepCounterSensor, SensorManager.SENSOR_DELAY_NORMAL);
+        }
+    }
 
     private void updateDailyGoal(int newGoal) {
         String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
@@ -166,9 +161,6 @@ public class QuanlyvandongActivity extends AppCompatActivity implements SensorEv
             }
         });
     }
-
-
-
 
     private void initializeStepData() {
         String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
@@ -205,7 +197,6 @@ public class QuanlyvandongActivity extends AppCompatActivity implements SensorEv
         });
     }
 
-
     private void loadStepHistory() {
         DatabaseReference userStepRef = FirebaseDatabase.getInstance().getReference("PhysicalActivities").child(userId);
         userStepRef.addValueEventListener(new ValueEventListener() {
@@ -225,120 +216,155 @@ public class QuanlyvandongActivity extends AppCompatActivity implements SensorEv
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.e("loadStepHistory", "Error fetching step history", databaseError.toException());
+                Log.e("loadStepHistory", "Error loading step history", databaseError.toException());
             }
         });
     }
-
 
     private void loadTodayStepData() {
         String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
-        DatabaseReference todayStepRef = FirebaseDatabase.getInstance().getReference("PhysicalActivities").child(userId).child(currentDate);
+        DatabaseReference userStepRef = FirebaseDatabase.getInstance().getReference("PhysicalActivities").child(userId).child(currentDate);
 
-        todayStepRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Log.d("loadTodayStepData", "DataSnapshot value: " + dataSnapshot.getValue());
-                Buocchan todayStepData = dataSnapshot.getValue(Buocchan.class);
-                if (todayStepData != null) {
-                    stepsTextView.setText("Steps: " + todayStepData.getStepsCount());
-                    goalTextView.setText("Goal: " + todayStepData.getGoal() + " steps");
-                    statusTextView.setText(todayStepData.isGoalAchieved() ? "Goal achieved!" : "Keep going! " + (todayStepData.getGoal() - todayStepData.getStepsCount()) + " steps remaining.");
-                    int progress = (int) ((double) todayStepData.getStepsCount() / todayStepData.getGoal() * 100);
-                    progressDrawable.setProgress(progress);
-                } else {
-                    stepsTextView.setText("Steps: 0");
-                    goalTextView.setText("Goal: " + stepGoal + " steps");
-                    statusTextView.setText("Keep going! You can do it.");
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.e("loadTodayStepData", "Error fetching today step data", databaseError.toException());
-            }
-        });
-    }
-    private void loadStepGoal() {
-        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users").child(userId);
-        userRef.child("stepGoal").addValueEventListener(new ValueEventListener() {
+        userStepRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    stepGoal = dataSnapshot.getValue(Integer.class);
-                    goalTextView.setText("Goal: " + stepGoal + " steps");
+                    Buocchan stepData = dataSnapshot.getValue(Buocchan.class);
+                    if (stepData != null) {
+                        stepCount = stepData.getStepsCount();
+                        stepGoal = stepData.getGoal();
+                        stepsTextView.setText(String.valueOf(stepCount));
+                        goalTextView.setText(String.valueOf(stepGoal));
+                        updateProgress(stepCount, stepGoal);
+                        if (stepCount >= stepGoal) {
+                            statusTextView.setText("Bạn đã hoàn thành mục tiêu");
+                        } else {
+                            statusTextView.setText("Tiếp tục cố gắng!");
+                        }
+                        updateCalories();
+                    }
+                } else {
+                    createNewStepData(currentDate);
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.e("loadStepGoal", "Error fetching step goal", databaseError.toException());
+                Log.e("loadTodayStepData", "Error loading today's step data", databaseError.toException());
             }
         });
+    }
+
+    private void updateProgress(int steps, int goal) {
+        int progressPercentage = (int) ((steps / (double) goal) * 100);
+        progressDrawable.setProgress(progressPercentage);
+    }
+
+    private void updateCalories() {
+        double caloriesBurned = calculateCaloriesBurned(stepCount, userWeight);
+        caloriesTextView.setText(String.format(Locale.getDefault(), "%.2f", caloriesBurned));
+    }
+
+    private double calculateCaloriesBurned(int steps, double weight) {
+        double stepsToKm = steps * 0.0008; // Average step length of 0.8 meters
+        double caloriesPerKmPerKg = 0.75; // Average calories burned per km per kg of body weight
+        return stepsToKm * weight * caloriesPerKmPerKg;
+    }
+
+    private void loadStepGoal() {
+        String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+        DatabaseReference userStepRef = FirebaseDatabase.getInstance().getReference("PhysicalActivities").child(userId).child(currentDate).child("goal");
+
+        userStepRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    Integer fetchedGoal = dataSnapshot.getValue(Integer.class);
+                    if (fetchedGoal != null) {
+                        stepGoal = fetchedGoal;
+                        goalTextView.setText(String.valueOf(stepGoal));
+                    }
+                } else {
+                    createNewStepData(currentDate);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.e("loadStepGoal", "Error loading step goal", databaseError.toException());
+            }
+        });
+    }
+
+    private void getUserWeight() {
+        if (userRef != null) {
+            userRef.child("weight").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        Double weight = dataSnapshot.getValue(Double.class);
+                        if (weight != null) {
+                            userWeight = weight;
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Log.e("getUserWeight", "Error loading user weight", databaseError.toException());
+                }
+            });
+        }
     }
 
     @Override
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor.getType() == Sensor.TYPE_STEP_COUNTER) {
             stepCount = (int) event.values[0];
-            stepsTextView.setText("Steps: " + stepCount);
-            int progress = (int) ((double) stepCount / stepGoal * 100);
-            progressDrawable.setProgress(progress);
-
-            if (stepCount >= stepGoal) {
-                statusTextView.setText("Goal achieved!");
-            } else {
-                int stepsRemaining = stepGoal - stepCount;
-                statusTextView.setText("Keep going! " + stepsRemaining + " steps remaining.");
-            }
-
-            // Update the steps count in the Firebase database
-            updateStepCountInFirebase();
+            stepsTextView.setText(String.valueOf(stepCount));
+            updateProgress(stepCount, stepGoal);
+            updateCalories();
+            saveStepCountToFirebase();
         }
     }
 
-    private void updateStepCountInFirebase() {
-        DatabaseReference userStepRef = FirebaseDatabase.getInstance().getReference("PhysicalActivities").child(userId);
-        userStepRef.orderByChild("date").equalTo(new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date()))
-                .limitToLast(1).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.exists()) {
-                            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                                String key = snapshot.getKey();
-                                if (key != null) {
-                                    snapshot.getRef().child("stepsCount").setValue(stepCount);
-                                }
-                            }
-                        }
-                    }
+    private void saveStepCountToFirebase() {
+        String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+        DatabaseReference userStepRef = FirebaseDatabase.getInstance().getReference("PhysicalActivities").child(userId).child(currentDate).child("stepsCount");
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                        Log.e("updateStepCount", "Error updating step count", databaseError.toException());
-                    }
-                });
+        userStepRef.setValue(stepCount).addOnCompleteListener(task -> {
+            if (!task.isSuccessful()) {
+                Log.e("saveStepCountToFirebase", "Failed to save step count", task.getException());
+            }
+        });
     }
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
-        // Do nothing
+        // Handle sensor accuracy changes if needed
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if (isSensorPresent) {
-            sensorManager.registerListener(this, stepCounterSensor, SensorManager.SENSOR_DELAY_UI);
-        }
+        registerStepSensor();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        if (isSensorPresent) {
-            sensorManager.unregisterListener(this);
-        }
+        sensorManager.unregisterListener(this);
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_ACTIVITY_RECOGNITION_PERMISSION) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                registerStepSensor();
+            } else {
+                Toast.makeText(this, "Permission for activity recognition is required for step counting", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 }

@@ -37,6 +37,27 @@
         android:textColor="@color/teal_200"
         android:textSize="18sp"
         android:textStyle="bold" />
+    <TextView
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:id="@+id/calories_text_viewLS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Calories: 0"
+        />
+
+    <TextView
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:id="@+id/distance_text_viewLS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Distance: 0 km"
+        />
 
     <TextView
         android:layout_gravity="center"
