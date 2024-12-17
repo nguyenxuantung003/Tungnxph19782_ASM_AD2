@@ -65,7 +65,7 @@ public class GoalsFragment extends Fragment {
 
         addGoalButton.setOnClickListener(v -> {
             // Check if the current user is the creator of the group
-            DatabaseReference groupRef = FirebaseDatabase.getInstance().getReference("groups").child(groupId);
+            DatabaseReference groupRef = FirebaseDatabase.getInstance().getReference("Groups").child(groupId);
             groupRef.child("creatorId").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -88,7 +88,7 @@ public class GoalsFragment extends Fragment {
     }
 
     private void loadGoals() {
-        DatabaseReference goalsRef = FirebaseDatabase.getInstance().getReference("groups").child(groupId).child("goals");
+        DatabaseReference goalsRef = FirebaseDatabase.getInstance().getReference("Groups").child(groupId).child("goals");
         goalsRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -142,7 +142,7 @@ public class GoalsFragment extends Fragment {
         builder.show();
     }
     private void addGoal(String title, String description) {
-        DatabaseReference goalsRef = FirebaseDatabase.getInstance().getReference("groups").child(groupId).child("goals");
+        DatabaseReference goalsRef = FirebaseDatabase.getInstance().getReference("Groups").child(groupId).child("goals");
         String goalId = goalsRef.push().getKey();
 
         if (goalId != null) {

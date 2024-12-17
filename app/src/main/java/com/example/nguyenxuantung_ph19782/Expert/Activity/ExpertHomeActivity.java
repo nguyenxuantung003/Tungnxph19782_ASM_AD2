@@ -1,6 +1,8 @@
 package com.example.nguyenxuantung_ph19782.Expert.Activity;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,12 +19,15 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.nguyenxuantung_ph19782.Activity.LoginActivity;
+import com.example.nguyenxuantung_ph19782.Activity.MainActivityUserProfile;
 import com.example.nguyenxuantung_ph19782.Expert.Fragment.ConsultationRequestsFragment;
 import com.example.nguyenxuantung_ph19782.Expert.Fragment.ChatWithUsersFragment;
 import com.example.nguyenxuantung_ph19782.Expert.Fragment.GroupsFragment;
 import com.example.nguyenxuantung_ph19782.Expert.Fragment.StatisticsFragment;
 import com.example.nguyenxuantung_ph19782.R;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class ExpertHomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -89,6 +94,8 @@ public class ExpertHomeActivity extends AppCompatActivity implements NavigationV
             selectedFragment = new GroupsFragment();
         } else if (id == R.id.nav_thongke) {
             selectedFragment = new StatisticsFragment();
+        } else if(id == R.id.nav_logout){
+            logout();
         }
 
         if (selectedFragment != null) {
@@ -104,5 +111,29 @@ public class ExpertHomeActivity extends AppCompatActivity implements NavigationV
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frg_container, fragment);
         fragmentTransaction.commit();
+    }
+    private void logout() {
+        // Tạo và hiển thị hộp thoại xác nhận
+        new android.app.AlertDialog.Builder(this)
+                .setTitle("Xác nhận đăng xuất")
+                .setMessage("Bạn có chắc chắn muốn đăng xuất không?")
+                .setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Thực hiện đăng xuất khi nhấn "Có"
+                        FirebaseAuth.getInstance().signOut();
+                        Intent intent = new Intent(ExpertHomeActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                        finish(); // Kết thúc Activity hiện tại
+                    }
+                })
+                .setNegativeButton("Không", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Đóng hộp thoại khi nhấn "Không"
+                        dialog.dismiss();
+                    }
+                })
+                .show();
     }
 }
